@@ -1,14 +1,16 @@
 import CalculationsUIDContainer from "./CalculationsUIDContainer";
+import GraphicsContainer from "./GraphicsContainer";
+import './Main.css';
 
 const Main = (props) => { 
 
         return <div>
-            <div id="main">
+            <div className="calculations">
             <div>
                 <CalculationsUIDContainer />
             </div>
             <div>
-                
+                <GraphicsContainer />
             </div>
         </div>
         </div>; 

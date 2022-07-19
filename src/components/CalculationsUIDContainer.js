@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
-import ReactDOM from 'react-dom';
 import { compose } from "redux";
-import { getCalculations } from '../redux/main-reducer';
+import { getCalculations, getCalculationResultById } from '../redux/main-reducer';
 import { connect } from 'react-redux';
 import  CalculationsUID  from './CalculationsUID';
 
@@ -12,7 +11,7 @@ const CalculationsUIDContainer = (props) => {
 
         return (  
             <div>
-                <CalculationsUID calculations={props.calculations}/>
+                <CalculationsUID calculations={props.calculations} getCalculationResultById={props.getCalculationResultById}/>
             </div>  );
 }
 
@@ -23,5 +22,5 @@ let mapStateToProps = (state) => {
 }
 
 export default compose(
-    connect(mapStateToProps, {getCalculations}))
+    connect(mapStateToProps, {getCalculations, getCalculationResultById}))
     (CalculationsUIDContainer);
