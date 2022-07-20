@@ -1,8 +1,14 @@
 import CalculationsUIDContainer from "./CalculationsUIDContainer";
 import GraphicsContainer from "./GraphicsContainer";
 import './Main.css';
+import { mainAPI } from "../api/api";
 
 const Main = (props) => { 
+
+    const getStatus = async() => {
+        let response = await mainAPI.getCalculationStatus();
+        alert(response.data);
+       }
 
         return <div>
             <div className="calculations">
@@ -11,6 +17,9 @@ const Main = (props) => {
             </div>
             <div>
                 <GraphicsContainer />
+            </div>
+            <div>
+                <button onClick={getStatus} >Статус</button>
             </div>
         </div>
         </div>; 

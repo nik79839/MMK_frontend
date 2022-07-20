@@ -14,7 +14,6 @@ const GraphicsContainer = (props) => {
 }
 
 let mapStateToProps = (state) => {
-    debugger;
     return {
         calculationResult: state.mainPage.calculationResult
     }   

@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import './Main.css';
 
-const CalculationsUID = (props) => { 
+const CalculationItem = (props) => { 
         
    const getCalculationResultById = () => {
     props.getCalculationResultById(props.calculations.calculationId);
@@ -10,4 +10,4 @@ const CalculationsUID = (props) => {
                     <a onClick={getCalculationResultById} className="active">{props.calculations.name}</a>
                 </div>; 
 }
-export default CalculationsUID;
+export default CalculationItem;

@@ -6,7 +6,7 @@ import  CalculationsUID  from './CalculationsUID';
 
 const CalculationsUIDContainer = (props) => { 
     useEffect(  () => {
-        props.getCalculations();;     
+        props.getCalculations();     
     },[])
 
         return (  
