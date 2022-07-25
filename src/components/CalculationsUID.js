@@ -10,8 +10,8 @@ const { TabPane } = Tabs;
 
 const CalculationsUID = (props) => { 
         
-    const getCalculationResultById = (id) => {
-        props.getCalculationResultById(id);
+    const getCalculationStatisticById = (id) => {
+        props.getCalculationStatisticById(id);
        } 
 
         return <div>
@@ -23,7 +23,7 @@ const CalculationsUID = (props) => {
                 {
                     props.calculations?.map((calculations) => 
                         {if (calculations.calculationEnd != null) return (
-                        <CalculationItem calculations={calculations} getCalculationResultById={getCalculationResultById} />)}
+                        <CalculationItem calculations={calculations} getCalculationStatisticById={getCalculationStatisticById} />)}
                     )
                 }              
                 </div>
@@ -32,7 +32,7 @@ const CalculationsUID = (props) => {
                 {
                     props.calculations?.map((calculations) => 
                     {if (calculations.calculationEnd == null) return (
-                    <CalculationProgress calculations={calculations} getCalculationResultById={getCalculationResultById} />)}
+                    <CalculationProgress calculations={calculations} getCalculationStatisticById={getCalculationStatisticById} />)}
                 )
                 }
             </TabPane>

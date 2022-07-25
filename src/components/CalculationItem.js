@@ -3,11 +3,11 @@ import './Main.css';
 
 const CalculationItem = (props) => { 
         
-   const getCalculationResultById = () => {
-    props.getCalculationResultById(props.calculations.calculationId);
+   const getCalculationStatisticById = () => {
+    props.getCalculationStatisticById(props.calculations.calculationId);
    }     
         return <div>                
-                    <a onClick={getCalculationResultById} className="active">{props.calculations.name}</a>
+                    <a onClick={getCalculationStatisticById} className="active">{props.calculations.name}</a>
                 </div>; 
 }
 export default CalculationItem;

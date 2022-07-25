@@ -1,0 +1,12 @@
+.main{
+    margin: auto;
+    text-align:center;
+}
+
+.calc{
+    width: 500px;
+    border: 2px solid black;
+    text-align:center;
+    margin: auto;
+    margin-top: 30px;
+}

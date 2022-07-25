@@ -4,7 +4,8 @@ import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Resp
 
 const Graphics = (props) => { 
         return <div >
-        <BarChart width={500} height={300} data={props.calculationResults} margin={{ top: 5, right: 30, left: 20, bottom: 5,}}>
+          <div className="chart">
+        <BarChart width={500} height={300} data={props.calculationStatistics.calculationResultProcessed} margin={{ top: 5, right: 30, left: 20, bottom: 5,}}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="interval" />
           <YAxis />
@@ -12,12 +13,16 @@ const Graphics = (props) => {
           <Legend />
           <Bar dataKey="height" fill="#8884d8" />
         </BarChart>
-            {
-                    props.calculationResults?.map((calculationResults) => (
-                        <h5>{calculationResults.powerFlowLimit}</h5>
-                    ))
-                }
-                
+        </div>
+        <div className="characteristics">
+          <ul>
+          <li>Максимум: {props.calculationStatistics.maximum}</li>
+          <li>Минимум: {props.calculationStatistics.minimum}</li>
+          <li>Мат ожидание: {props.calculationStatistics.mean}</li>
+          <li>СКО: {props.calculationStatistics.stD}</li>
+          </ul>
+
+        </div>
         </div>; 
 }
 export default Graphics;

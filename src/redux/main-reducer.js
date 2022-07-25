@@ -2,7 +2,7 @@ import { mainAPI } from "../api/api";
 import { withCallbacks} from 'redux-signalr';
 
 const SET_CALCULATIONS = 'SET_CALCULATIONS';
-const SET_CALCULATIONRESULT = 'SET_CALCULATIONRESULT';
+const SET_CALCULATIONSTATISTIC = 'SET_CALCULATIONSTATISTIC';
 const UPDATE_PROGRESS = 'UPDATE_PROGRESS';
 
 let initialState = {
@@ -10,10 +10,10 @@ let initialState = {
         { calculationId: 'iyk', name:'testInitial' , calculationStart: null, calculationEnd: null,progress: null },
     ],
 
-    calculationResult:
+    calculationStatistic:
     [
-        { interval: '1-2',height: '0,012' },
-        { interval: '2-3',height: '0,02' },
+        { maximum: '20',minimum: '13', mean: '18', stD: '9', calculationResultProcessed: {interval: '1-2', height: '0,012'}},
+        { maximum: '25',minimum: '12', mean: '16', stD: '8', calculationResultProcessed: {interval: '1-3', height: '0,024'} },
     ]
 };
 
@@ -24,10 +24,10 @@ const mainReducer = (state = initialState, action) => {
                 ...state,
                 calculations: action.calculations
             }
-        case SET_CALCULATIONRESULT:
+        case SET_CALCULATIONSTATISTIC:
             return {                                     
                 ...state,
-                calculationResult: action.calculationResult
+                calculationStatistic: action.calculationStatistic
             }
         case UPDATE_PROGRESS:
             let updatedList = [...state.calculations];
@@ -56,13 +56,13 @@ export const getCalculations = () => {
     }
 }
 
-export const setCalculationResult = (calculationResult) => (
-    { type: SET_CALCULATIONRESULT,  calculationResult  }
+export const setCalculationStatistic = (calculationStatistic) => (
+    { type: SET_CALCULATIONSTATISTIC,  calculationStatistic: calculationStatistic  }
 )
-export const getCalculationResultById = (id) => {
+export const getCalculationStatisticById = (id) => {
     return async (dispatch) => { 
-        let response = await mainAPI.getCalculationResultById(id);
-        dispatch(setCalculationResult(response.data));      
+        let response = await mainAPI.getCalculationStatisticById(id);
+        dispatch(setCalculationStatistic(response.data));      
     }
 }
 

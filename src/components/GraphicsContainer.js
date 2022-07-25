@@ -9,13 +9,13 @@ const GraphicsContainer = (props) => {
 
         return (  
             <div>
-                <Graphics calculationResults={props.calculationResult}/>
+                <Graphics calculationStatistics={props.calculationStatistic}/>
             </div>  );
 }
 
 let mapStateToProps = (state) => {
     return {
-        calculationResult: state.mainPage.calculationResult
+        calculationStatistic: state.mainPage.calculationStatistic
     }   
 }
 

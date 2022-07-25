@@ -4,7 +4,7 @@ export const mainAPI = {
     getCalculations() {
         return axios.get('https://localhost:7231/CalculationPowerFlows/GetCalculations'); //
     },
-    getCalculationResultById(id) {
+    getCalculationStatisticById(id) {
         return axios.get('https://localhost:7231/CalculationPowerFlows/GetCalculations/'+id); //
     },
     getCalculationStatus() {
