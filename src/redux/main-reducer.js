@@ -20,7 +20,7 @@ let initialState = {
 const mainReducer = (state = initialState, action) => { 
     switch (action.type) {
         case SET_CALCULATIONS:
-            return {                                     
+        return {                                     
                 ...state,
                 calculations: action.calculations
             }

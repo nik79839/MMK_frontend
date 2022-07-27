@@ -3,16 +3,19 @@ import { compose } from "redux";
 import { getCalculations, getCalculationStatisticById } from '../redux/main-reducer';
 import { connect } from 'react-redux';
 import  CalculationsUID  from './CalculationsUID';
+import { Spin } from 'antd';
 
 const CalculationsUIDContainer = (props) => { 
     useEffect(  () => {
         props.getCalculations();     
     },[])
 
-        return (  
+        return <>   
             <div>
                 <CalculationsUID calculations={props.calculations} getCalculationStatisticById={props.getCalculationStatisticById}/>
-            </div>  );
+            </div>
+            {(props.calculations[0].calculationId == 'iyk') && (<Spin />)}
+            </> 
 }
 
 let mapStateToProps = (state) => {
