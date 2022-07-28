@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import './Main.css';
+import '../Main.css';
 import { Progress } from 'antd';
 
 const CalculationProgress = (props) => { 

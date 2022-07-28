@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { compose } from "redux";
-import { getCalculations, getCalculationStatisticById } from '../redux/main-reducer';
+import { getCalculations, getCalculationStatisticById } from '../../redux/main-reducer';
 import { connect } from 'react-redux';
 import  CalculationsUID  from './CalculationsUID';
 import { Spin } from 'antd';

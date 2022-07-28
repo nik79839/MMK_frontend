@@ -11,10 +11,11 @@ let initialState = {
     ],
 
     calculationStatistic:
-    [
-        { maximum: '20',minimum: '13', mean: '18', stD: '9', calculationResultProcessed: {interval: '1-2', height: '0,012'}},
-        { maximum: '25',minimum: '12', mean: '16', stD: '8', calculationResultProcessed: {interval: '1-3', height: '0,024'} },
-    ]
+    
+        { maximum: '20',minimum: '13', mean: '18', stD: '9', calculationResultProcessed: [{interval: '1-2', height: '0,012'}],
+        voltageResultProcessed: [{nodeNumber: 'testNum', calculationResultProcesseds: [{interval: '1-2', height: '0,012'}]},
+        {nodeNumber: 'testNum2', calculationResultProcesseds: [{interval: '1-2', height: '0,012'}]}]}  
+    
 };
 
 const mainReducer = (state = initialState, action) => { 

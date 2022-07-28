@@ -3,7 +3,7 @@ import  CalculationProgress  from './CalculationProgress';
 import  CalculationItem  from './CalculationItem';
 import { Tabs } from 'antd';
 import 'antd/dist/antd.css';
-import './Main.css';
+import '../Main.css';
 
 
 const { TabPane } = Tabs;

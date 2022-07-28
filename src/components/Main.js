@@ -1,5 +1,5 @@
-import CalculationsUIDContainer from "./CalculationsUIDContainer";
-import GraphicsContainer from "./GraphicsContainer";
+import CalculationsUIDContainer from "./Calculations/CalculationsUIDContainer";
+import GraphicsContainer from "./Graphics/GraphicsContainer";
 import './Main.css';
 import { mainAPI } from "../api/api";
 

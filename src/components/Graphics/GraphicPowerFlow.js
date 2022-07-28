@@ -2,9 +2,10 @@
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 
-const Graphics = (props) => { 
+const GraphicPowerFlow = (props) => { 
         return <div >
           <div className="chart">
+            <h3>Предельный переток</h3>
         <BarChart width={500} height={300} data={props.calculationStatistics.calculationResultProcessed} margin={{ top: 5, right: 30, left: 20, bottom: 5,}}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="interval" />
@@ -25,4 +26,4 @@ const Graphics = (props) => {
         </div>
         </div>; 
 }
-export default Graphics;
+export default GraphicPowerFlow;
