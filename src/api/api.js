@@ -7,8 +7,17 @@ export const mainAPI = {
     getCalculationStatisticById(id) {
         return axios.get('https://localhost:7231/CalculationPowerFlows/GetCalculations/'+id); //
     },
-    getCalculationStatus() {
-        return axios.get('https://localhost:7231/CalculationPowerFlows/GetCalculations/status'); //
+    deleteCalculationById(id) {
+        return axios.delete('https://localhost:7231/CalculationPowerFlows/DeleteCalculations/'+id); //
+    },
+}
+
+export const calculationFormAPI = {
+    getSeches() {
+        return axios.get('https://localhost:7231/SchemeInfo/GetSech'); //
+    },
+    getDistricts() {
+        return axios.get('https://localhost:7231/SchemeInfo/GetDistricts/'); //
     },
 }
 

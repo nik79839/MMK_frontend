@@ -3,7 +3,7 @@ import {Provider} from "react-redux";
 import store from "./redux/redux-store";
 import {Layout} from "./components/Layout";
 import {Route, Routes, Router,BrowserRouter} from "react-router-dom";
-import CalculationForm from "./components/CalculationForm";
+import CalculationFormContainer from "./components/CalculationForm/CalculationFormContainer";
 import Main from './components/Main';
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
       <BrowserRouter>
         <Layout>
             <Routes>
-                <Route exact path='/' element={<CalculationForm/>} />
+                <Route exact path='/' element={<CalculationFormContainer/>} />
                 <Route exact path='/counter' element={<Main/>} />
             </Routes>
         </Layout>

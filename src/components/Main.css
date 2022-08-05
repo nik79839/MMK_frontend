@@ -1,6 +1,6 @@
 .calculations{
     display: grid;
-    grid-template-columns: 4fr 10fr;
+    grid-template-columns: 4fr 6fr;
 }
 .calculationsItems{
     padding: 10px;

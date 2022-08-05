@@ -28,7 +28,7 @@ const GraphicVoltage = (props) => {
         {props.calculationStatistics.voltageResultProcessed?.map((voltageResultProcessed) => (
           <Option key={voltageResultProcessed.nodeNumber}>{voltageResultProcessed.nodeNumber}</Option>
         ))}
-      </Select>
+          </Select>
           </div>
         <BarChart width={500} height={300} data={voltage.calculationResultProcesseds} margin={{ top: 5, right: 30, left: 20, bottom: 5,}}>
           <CartesianGrid strokeDasharray="3 3" />
