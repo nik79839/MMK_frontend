@@ -15,7 +15,7 @@ const Main = (props) => {
             <div>
                 <CalculationsUIDContainer />
             </div>
-            <div>
+            <div className="graphics">
                 <GraphicsContainer />
             </div>
             <div>

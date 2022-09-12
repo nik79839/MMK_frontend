@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom'
 import  CalculationProgress  from './CalculationProgress';
 import  CalculationItem  from './CalculationItem';
 import { Tabs, List } from 'antd';
+import { DeleteOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 import '../Main.css';
 
@@ -30,19 +31,19 @@ const CalculationsUID = (props) => {
        } 
 
         return <div>
-            <h2>Список расчетов</h2>
+            <h4>Список расчетов</h4>
             <div>
             <Tabs defaultActiveKey="1">
             <TabPane tab="Выполнено" key="1">
                 <div className="calculationsItems">
                 <List dataSource={calculationReady} itemLayout="horizontal" renderItem={(item) => (
-                    <List.Item actions={[<a key="list-loadmore-edit" onClick={() => deleteCalculationById(item.calculationId)}>Удалить</a>]}>
+                    <List.Item actions={[<DeleteOutlined style={{color: 'blue'}} onClick={() => deleteCalculationById(item.calculationId)}>Удалить</DeleteOutlined>]}>
                         <List.Item.Meta
                             title={<CalculationItem calculations={item} getCalculationStatisticById={getCalculationStatisticById} deleteCalculationById={deleteCalculationById} />}
                             description={item.calculationEnd}
                         />
                         {item.nameOfSech != null ? (
-                        <div>КС: {item.nameOfSech}</div>): null}
+                        <div className='sechName'>КС: {item.nameOfSech}</div>): null}
                     </List.Item>
                 )}/>             
                 </div>

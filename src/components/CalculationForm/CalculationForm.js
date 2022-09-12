@@ -1,16 +1,18 @@
 import { Formik, Field, Form,Checkbox } from "formik";
 import axios from 'axios';
 import './CalculationForm.css';
+import { message } from 'antd';
+import { Navigate, useNavigate } from "react-router-dom";
 
 const CalculationForm = (props) => {   
-  const controller = new AbortController();
-  const CancelToken = axios.CancelToken;
-  const source = CancelToken.source();
+  const source = axios.CancelToken.source();
   window.addEventListener("beforeunload", (ev) => 
 {  
     ev.preventDefault();
     return ev.returnValue = 'Are you sure you want to close?';
 });
+
+  const navigate = useNavigate();
 
   const abortZ = () => {
     source.cancel();
@@ -22,8 +24,9 @@ const CalculationForm = (props) => {
         initialValues={{ CountOfImplementations: "",name: "", percentLoad: "", percentForWorsening: "",isAllNodesInitial: true,
         loadNodes123: "" ,sechNumber:""}}
         onSubmit={(values) => {
-          axios.post("https://localhost:7231/CalculationPowerFlows/PostCalculations",values, 
-          {headers: { "Content-Type": "multipart/form-data"}, cancelToken: source.token})
+          props.startCalculation(values, source.token);
+          message.info('Начало выполнения расчета');
+          //navigate('/counter');
         }}
       >
         {({ values }) => (

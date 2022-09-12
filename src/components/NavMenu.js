@@ -1,49 +1,22 @@
 import React, { Component } from 'react';
-import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import './NavMenu.css';
+import { NavLink } from 'react-router-dom';
+import { Menu } from 'antd';
 
-export class NavMenu extends Component {
-  static displayName = NavMenu.name;
+const NavMenu = (props) => {
 
-  constructor (props) {
-    super(props);
-
-    this.toggleNavbar = this.toggleNavbar.bind(this);
-    this.state = {
-      collapsed: true
-    };
+  return <>
+      <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['home']}>
+        <Menu.Item key="home" > 
+          <NavLink tag={Link} className="tags" to="/" style={{ textDecoration: 'none' }}>Расчеты</NavLink>
+        </Menu.Item>
+        <Menu.Item key="calculation" > 
+          <NavLink tag={Link} className="text-white" to="/counter" style={{ textDecoration: 'none' }}>Выполнить расчет</NavLink>
+        </Menu.Item>
+        <Menu.Item key="files" > 
+          <NavLink tag={Link} className="text-white" to="/rastrFiles" style={{ textDecoration: 'none' }}>Рабочие файлы</NavLink>
+        </Menu.Item>
+      </Menu>
+      </>
   }
-
-  toggleNavbar () {
-    this.setState({
-      collapsed: !this.state.collapsed
-    });
-  }
-
-  render () {
-    return (
-      <header>
-        <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3 " light>
-          <Container>
-            <NavbarBrand tag={Link} to="/">Project</NavbarBrand>
-            <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-            <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
-              <ul className="navbar-nav flex-grow">
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/">Выполнить расчет</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/counter">Расчеты</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
-                </NavItem>
-              </ul>
-            </Collapse>
-          </Container>
-        </Navbar>
-      </header>
-    );
-  }
-}
+  export default NavMenu

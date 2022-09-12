@@ -1,5 +1,6 @@
 import { mainAPI } from "../api/api";
 import { withCallbacks} from 'redux-signalr';
+import * as axios from "axios";
 
 const SET_CALCULATIONS = 'SET_CALCULATIONS';
 const DELETE_CALCULATION = 'DELETE_CALCULATION';
@@ -69,8 +70,9 @@ export const getCalculationStatisticById = (id) => {
 }
 
 export const deleteCalculationById = (id) => {
-    return async () => { 
-        let response = await mainAPI.deleteCalculationById(id);      
+    return async (dispatch) => { 
+        let response = await mainAPI.deleteCalculationById(id);
+        dispatch(setCalculations(response.data));       
     }
 }
 
@@ -82,7 +84,8 @@ export const callbacks = withCallbacks()
     .add('SendProgress', (msg,id) => (dispatch) => {
     console.log(msg);
     dispatch (updateProgress(msg,id));
-    if (msg == 100) alert("Расчет завершен");
-  })
- 
+    if (msg == 100) {
+        alert("Расчет завершен");
+    }  
+  }) 
 export default mainReducer;

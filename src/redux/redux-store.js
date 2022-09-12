@@ -1,14 +1,16 @@
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import thunkMiddleware from "redux-thunk";
 import mainReducer from "./main-reducer";
-import CalculationFormReducer from './calculationForm-reducer';
+import CalculationFormReducer from './rastrFiles-reducer';
+import RastrFilesReducer from './rastrFiles-reducer'
 
 import {callbacks} from "./main-reducer";
 import { HubConnectionBuilder, LogLevel, HttpTransportType, signalMiddleware} from 'redux-signalr';
 
 let reducers = combineReducers({
     mainPage: mainReducer,
-    calculationFormPage: CalculationFormReducer
+    calculationFormPage: CalculationFormReducer,
+    rastrFilesPage: RastrFilesReducer,
 });
 
 const connection = new HubConnectionBuilder()

@@ -1,7 +1,12 @@
 .calculations{
     display: grid;
-    grid-template-columns: 4fr 6fr;
+    grid-template-columns: 4fr 6fr;   
 }
+
+.graphics{  
+    border-left:1px solid gainsboro;
+}
+
 .calculationsItems{
     padding: 10px;
     color: white;   
@@ -29,4 +34,8 @@
 
 textarea{
     margin-top: 30px;
+}
+
+.sechName{
+    color:grey;
 }

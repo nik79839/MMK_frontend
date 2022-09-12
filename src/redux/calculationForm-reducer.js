@@ -1,4 +1,4 @@
-import { mainAPI, calculationFormAPI } from "../api/api";
+import { calculationFormAPI } from "../api/api";
 
 const SET_SECHES= 'SET_SECHES';
 const SET_DISTRICTS= 'SET_DISTRICTS';
@@ -46,6 +46,13 @@ export const getDistricts = () => {
     return async (dispatch) => { 
         let response = await calculationFormAPI.getDistricts();
         dispatch(setDistricts(response.data));      
+    }
+}
+
+export const startCalculation = (values, token) => {
+    return async () => { 
+        let response = await calculationFormAPI.startCalculation(values, token);
+        //dispatch(setDistricts(response.data));      
     }
 }
  

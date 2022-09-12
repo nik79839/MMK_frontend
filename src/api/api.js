@@ -19,5 +19,19 @@ export const calculationFormAPI = {
     getDistricts() {
         return axios.get('https://localhost:7231/SchemeInfo/GetDistricts/'); //
     },
+    startCalculation(values, cancelToken) {
+        return axios.post("https://localhost:7231/CalculationPowerFlows/PostCalculations",values, 
+        {headers: { "Content-Type": "multipart/form-data"}, cancelToken: cancelToken});
+    }
+}
+
+export const rastrFilesAPI = {
+    getRastrFiles() {
+        return axios.get('https://localhost:7231/RastrFiles/GetRastrFiles'); //
+    },
+    postRastrFiles(file) {
+        debugger;
+        return axios.post('https://localhost:7231/RastrFiles/PostRastrFiles',file); //
+    }
 }
 

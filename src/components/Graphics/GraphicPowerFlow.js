@@ -5,7 +5,7 @@ import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Resp
 const GraphicPowerFlow = (props) => { 
         return <div >
           <div className="chart">
-            <h3>Предельный переток</h3>
+            <h4>Предельный переток</h4>
         <BarChart width={500} height={300} data={props.calculationStatistics.calculationResultProcessed} margin={{ top: 5, right: 30, left: 20, bottom: 5,}}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="interval" />

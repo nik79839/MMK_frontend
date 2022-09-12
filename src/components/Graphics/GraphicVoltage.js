@@ -20,7 +20,7 @@ const GraphicVoltage = (props) => {
 
         return <div >
           <div className="chart">
-          <h3>Напряжение</h3>
+          <h4>Напряжение</h4>
           <div className="select">
           Узел: 
           <Select defaultValue={props.calculationStatistics.voltageResultProcessed[0].nodeNumber} style={{width: 120,}} 

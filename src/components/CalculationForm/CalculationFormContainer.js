@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { compose } from "redux";
-import { getSeches, getDistricts } from '../../redux/calculationForm-reducer';
+import { getSeches, getDistricts,startCalculation } from '../../redux/calculationForm-reducer';
 import { connect } from 'react-redux';
 import  CalculationForm  from './CalculationForm';
 
@@ -11,7 +11,7 @@ const CalculationFormContainer = (props) => {
 
         return <>   
             <div>
-                <CalculationForm seches={props.seches}/>
+                <CalculationForm seches={props.seches} startCalculation={props.startCalculation} />
             </div>
             </> 
 }
@@ -23,5 +23,5 @@ let mapStateToProps = (state) => {
 }
 
 export default compose(
-    connect(mapStateToProps, {getSeches, getDistricts}))
+    connect(mapStateToProps, {getSeches, getDistricts, startCalculation}))
     (CalculationFormContainer);
