@@ -19,6 +19,9 @@ export const calculationFormAPI = {
     getDistricts() {
         return axios.get('https://localhost:7231/SchemeInfo/GetDistricts/'); //
     },
+    getLoadNodes() {
+        return axios.get('https://localhost:7231/SchemeInfo/GetLoadNodes/'); //
+    },
     startCalculation(values, cancelToken) {
         return axios.post("https://localhost:7231/CalculationPowerFlows/PostCalculations",values, 
         {headers: { "Content-Type": "multipart/form-data"}, cancelToken: cancelToken});

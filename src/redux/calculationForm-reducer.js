@@ -2,6 +2,7 @@ import { calculationFormAPI } from "../api/api";
 
 const SET_SECHES= 'SET_SECHES';
 const SET_DISTRICTS= 'SET_DISTRICTS';
+const SET_LOADNODES= 'SET_LOADNODES';
 
 let initialState = {
     seches: [
@@ -10,6 +11,9 @@ let initialState = {
     districts: [
         { num: '1', nameSech:'testSech' , brunches: null },
     ],
+    loadNodes: [
+        {name: null, number: null, district: {name: null, number: null}}
+    ]
 };
 
 const CalculationFormReducer = (state = initialState, action) => { 
@@ -22,7 +26,12 @@ const CalculationFormReducer = (state = initialState, action) => {
         case SET_DISTRICTS:
         return {                                     
                 ...state,
-                seches: action.seches
+                districts: action.districts
+            }
+        case SET_LOADNODES:
+        return {                                     
+                ...state,
+                loadNodes: action.loadNodes
             }
         default:                                     
             return state;
@@ -46,6 +55,16 @@ export const getDistricts = () => {
     return async (dispatch) => { 
         let response = await calculationFormAPI.getDistricts();
         dispatch(setDistricts(response.data));      
+    }
+}
+
+export const setLoadNodes = (loadNodes) => (
+    { type: SET_LOADNODES,  loadNodes  }
+)
+export const getLoadNodes = () => {
+    return async (dispatch) => { 
+        let response = await calculationFormAPI.getLoadNodes();      
+        dispatch(setLoadNodes(response.data));      
     }
 }
 

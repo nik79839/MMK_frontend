@@ -1,7 +1,7 @@
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import thunkMiddleware from "redux-thunk";
 import mainReducer from "./main-reducer";
-import CalculationFormReducer from './rastrFiles-reducer';
+import CalculationFormReducer from './calculationForm-reducer';
 import RastrFilesReducer from './rastrFiles-reducer'
 
 import {callbacks} from "./main-reducer";
