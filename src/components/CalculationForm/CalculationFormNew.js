@@ -17,9 +17,15 @@ const CalculationFormNew = (props) => {
     source.cancel();
     console.log("Cancel");
   };
+
+  const onFinish = (values) => {
+    console.log('Success:', values);
+    props.startCalculation(values, source.token);
+  };
+
         return <div className="main">
             <h3>Выполнить расчет</h3>
-      <Form name="basic" labelCol={{span: 8,}} wrapperCol={{span: 8,}} autoComplete="off"
+      <Form name="basic" labelCol={{span: 8,}} wrapperCol={{span: 8,}} autoComplete="off" onFinish={onFinish}
       initialValues={{
         name: '',
       }}>
@@ -61,13 +67,13 @@ const CalculationFormNew = (props) => {
             <Select.OptGroup label={district.name}>
               {props.loadNodes?.map((loadNode) => {
                 if (loadNode.district.name == district.name) return ( 
-                  <Select.Option value={loadNode.name}>{loadNode.name} </Select.Option>)})}
+                  <Select.Option value={loadNode.number}>{loadNode.name} </Select.Option>)})}
            </Select.OptGroup>))}
 
             <Select.OptGroup label='Узлы без названия района'>
               {props.loadNodes?.map((loadNode) => {
                 if (loadNode.district.name == '') return ( 
-                  <Select.Option value={loadNode.name}>{loadNode.name} </Select.Option>)})}
+                  <Select.Option value={loadNode.number}>{loadNode.name} </Select.Option>)})}
            </Select.OptGroup>   
           
         </Select>

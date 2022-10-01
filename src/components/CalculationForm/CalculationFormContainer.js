@@ -13,6 +13,7 @@ const CalculationFormContainer = (props) => {
         props.getDistricts();
     },[])
 
+
         return <>   
             <div>
                 <CalculationFormNew seches={props.seches} startCalculation={props.startCalculation} rastrFiles={props.rastrFiles}

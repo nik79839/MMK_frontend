@@ -10,10 +10,10 @@ const GraphicsContainer = (props) => {
 
         return  <div className="graphics">       
             <div>
-                <GraphicPowerFlow calculationStatistics={props.calculationStatistic}/>
+                <GraphicPowerFlow calculationStatistics={props.calculationStatistic.powerFlowResultProcessed}/>
             </div> 
             <div>
-                <GraphicVoltage calculationStatistics={props.calculationStatistic}/>
+                <GraphicVoltage calculationStatistics={props.calculationStatistic.voltageResultProcessed}/>
             </div>  
             </div>
 }

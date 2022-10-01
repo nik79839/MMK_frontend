@@ -12,12 +12,11 @@ let initialState = {
         { calculationId: 'iyk', name:'testInitial' , calculationStart: null, calculationEnd: null,progress: null },
     ],
 
-    calculationStatistic:
-    
-        { maximum: '20',minimum: '13', mean: '18', stD: '9', calculationResultProcessed: [{interval: '1-2', height: '0,012'}],
-        voltageResultProcessed: [{nodeNumber: 'testNum', calculationResultProcesseds: [{interval: '1-2', height: '0,012'}]},
-        {nodeNumber: 'testNum2', calculationResultProcesseds: [{interval: '1-2', height: '0,012'}]}]}  
-    
+    calculationStatistic: {
+        powerFlowResultProcessed: {maximum: '20',minimum: '13', mean: '18', stD: '9', histogramData: [{interval: '1-2', height: '0,012'}]},
+        
+        voltageResultProcessed: [{nodeNumber: 'testNum', histogramData: [{interval: '1-2', height: '0,012'}]},
+            {nodeNumber: 'testNum2', histogramData: [{interval: '1-2', height: '0,012'}]}]}  
 };
 
 const mainReducer = (state = initialState, action) => { 

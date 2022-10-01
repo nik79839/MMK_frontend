@@ -24,7 +24,7 @@ export const calculationFormAPI = {
     },
     startCalculation(values, cancelToken) {
         return axios.post("https://localhost:7231/CalculationPowerFlows/PostCalculations",values, 
-        {headers: { "Content-Type": "multipart/form-data"}, cancelToken: cancelToken});
+        {headers: { "Content-Type": "application/json"}, cancelToken: cancelToken});
     }
 }
 
