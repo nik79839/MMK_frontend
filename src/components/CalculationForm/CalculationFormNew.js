@@ -56,22 +56,22 @@ const CalculationFormNew = (props) => {
       <Form.Item label="Контролируемое сечение" name="sechNumber" rules={[{
             required: true, message: 'Please input your username!',},]}>
         <Select>
-          {props.seches?.map((sech) => (
-          <Select.Option value={sech.num}>{sech.nameSech} </Select.Option>))}
+          {props.rastrSchemeInfo.seches?.map((sech) => (
+          <Select.Option value={sech.num}>{sech.sechName} </Select.Option>))}
         </Select>
       </Form.Item>
       <Form.Item label="Узлы для утяжеления" name="nodesForWorsening" rules={[{
             required: true, message: 'Please input your username!',},]}>
         <Select mode="multiple" showSearch >
-          {props.districts?.map((district) => (
+          {props.rastrSchemeInfo.districts?.map((district) => (
             <Select.OptGroup label={district.name}>
-              {props.loadNodes?.map((loadNode) => {
+              {props.rastrSchemeInfo.loadNodes?.map((loadNode) => {
                 if (loadNode.district.name == district.name) return ( 
                   <Select.Option value={loadNode.number}>{loadNode.name} </Select.Option>)})}
            </Select.OptGroup>))}
 
             <Select.OptGroup label='Узлы без названия района'>
-              {props.loadNodes?.map((loadNode) => {
+              {props.rastrSchemeInfo.loadNodes?.map((loadNode) => {
                 if (loadNode.district.name == '') return ( 
                   <Select.Option value={loadNode.number}>{loadNode.name} </Select.Option>)})}
            </Select.OptGroup>   

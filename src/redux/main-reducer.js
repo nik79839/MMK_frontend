@@ -4,20 +4,27 @@ import * as axios from "axios";
 
 const SET_CALCULATIONS = 'SET_CALCULATIONS';
 const DELETE_CALCULATION = 'DELETE_CALCULATION';
-const SET_CALCULATIONSTATISTIC = 'SET_CALCULATIONSTATISTIC';
+const SET_CALCULATIONRESULTINFO = 'SET_CALCULATIONRESULTINFO';
 const UPDATE_PROGRESS = 'UPDATE_PROGRESS';
 
 let initialState = {
     calculations: [
-        { calculationId: 'iyk', name:'testInitial' , calculationStart: null, calculationEnd: null,progress: null },
+        { id: 'iyk', name:'testInitial' , calculationStart: null, calculationEnd: null,progress: null },
     ],
 
-    calculationStatistic: {
-        powerFlowResultProcessed: {maximum: '20',minimum: '13', mean: '18', stD: '9', histogramData: [{interval: '1-2', height: '0,012'}]},
-        
-        voltageResultProcessed: [{nodeNumber: 'testNum', histogramData: [{interval: '1-2', height: '0,012'}]},
-            {nodeNumber: 'testNum2', histogramData: [{interval: '1-2', height: '0,012'}]}]}  
-};
+    calculationResultInfo: {
+        processedResult: {
+            powerFlowResultProcessed: {maximum: '20',minimum: '13', mean: '18', stD: '9', histogramData: [{interval: '1-2', height: '0,012'}]},
+            voltageResultProcessed: [{nodeNumber: 'testNum', histogramData: [{interval: '1-2', height: '0,012'}]},
+                {nodeNumber: 'testNum2', histogramData: [{interval: '1-2', height: '0,012'}]}],
+            currentResultProcessed: []},
+        initialResult: {
+            powerFlowResults: [{powerFlowLimit: 868, calculationId: "282cac56",implementationId: 1}],
+            voltageResults: [{nodeNumber: 2643,nodeName: "Север",voltageValue: 176,calculationId: "282ca",implementationId: 1}],
+            currentResults: []
+        },
+        worseningSettings: [1654, 2653]
+}};
 
 const mainReducer = (state = initialState, action) => { 
     switch (action.type) {
@@ -26,10 +33,10 @@ const mainReducer = (state = initialState, action) => {
                 ...state,
                 calculations: action.calculations
             }
-        case SET_CALCULATIONSTATISTIC:
+        case SET_CALCULATIONRESULTINFO:
             return {                                     
                 ...state,
-                calculationStatistic: action.calculationStatistic
+                calculationResultInfo: action.calculationResultInfo
             }
         case UPDATE_PROGRESS:
             let updatedList = [...state.calculations];
@@ -58,13 +65,13 @@ export const getCalculations = () => {
     }
 }
 
-export const setCalculationStatistic = (calculationStatistic) => (
-    { type: SET_CALCULATIONSTATISTIC,  calculationStatistic: calculationStatistic  }
+export const setCalculationResultInfo = (calculationResultInfo) => (
+    { type: SET_CALCULATIONRESULTINFO,  calculationResultInfo: calculationResultInfo  }
 )
-export const getCalculationStatisticById = (id) => {
+export const getCalculationResultInfoById = (id) => {
     return async (dispatch) => { 
         let response = await mainAPI.getCalculationStatisticById(id);
-        dispatch(setCalculationStatistic(response.data));      
+        dispatch(setCalculationResultInfo(response.data));      
     }
 }
 

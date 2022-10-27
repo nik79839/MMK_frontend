@@ -1,0 +1,23 @@
+.calculations{
+    display: grid;
+    grid-template-columns: 3fr 6fr;   
+}
+
+
+
+.messages{
+    padding: 10px;
+}
+.messages.message{
+    padding: 10px;
+}
+
+.avaDialogs{
+    width: 30px;
+    height: 30px;
+    border-radius: 30px; 
+}
+
+textarea{
+    margin-top: 30px;
+}

@@ -13,14 +13,8 @@ export const mainAPI = {
 }
 
 export const calculationFormAPI = {
-    getSeches() {
-        return axios.get('https://localhost:7231/SchemeInfo/GetSech'); //
-    },
-    getDistricts() {
-        return axios.get('https://localhost:7231/SchemeInfo/GetDistricts/'); //
-    },
-    getLoadNodes() {
-        return axios.get('https://localhost:7231/SchemeInfo/GetLoadNodes/'); //
+    getRastrSchemeInfo() {
+        return axios.get('https://localhost:7231/RastrSchemeInfo/GetRastrSchemeInfo'); //
     },
     startCalculation(values, cancelToken) {
         return axios.post("https://localhost:7231/CalculationPowerFlows/PostCalculations",values, 
@@ -33,7 +27,6 @@ export const rastrFilesAPI = {
         return axios.get('https://localhost:7231/RastrFiles/GetRastrFiles'); //
     },
     postRastrFiles(file) {
-        debugger;
         return axios.post('https://localhost:7231/RastrFiles/PostRastrFiles',file); //
     }
 }

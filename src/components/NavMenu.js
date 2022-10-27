@@ -14,7 +14,7 @@ const NavMenu = (props) => {
           <NavLink tag={Link} className="text-white" to="/counter" style={{ textDecoration: 'none' }}>Выполнить расчет</NavLink>
         </Menu.Item>
         <Menu.Item key="files" > 
-          <NavLink tag={Link} className="text-white" to="/rastrFiles" style={{ textDecoration: 'none' }}>Рабочие файлы</NavLink>
+          <NavLink tag={Link} className="text-white" to="/rastrFiles" style={{ textDecoration: 'none' }}>Режимы</NavLink>
         </Menu.Item>
       </Menu>
       </>

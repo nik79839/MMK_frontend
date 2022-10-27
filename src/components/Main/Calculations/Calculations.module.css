@@ -1,0 +1,25 @@
+.item {
+    color: brown;
+}
+
+.active {
+    font-size:larger;
+    font-weight:bolder;
+    background-color:azure
+}
+
+.calculationsItems{
+    padding: 10px;
+    color: white;   
+}
+.calculationsItems a{
+    color: black;   
+    text-decoration: none;
+}
+.calculationsItems .active{
+    color: black;     
+}
+
+.sechName{
+    color:gray
+}

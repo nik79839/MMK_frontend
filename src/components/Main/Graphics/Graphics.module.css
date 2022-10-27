@@ -1,0 +1,18 @@
+.graphics{  
+    display: grid;
+    grid-template-columns: 6fr 3fr;
+    grid-template-rows: 1fr 1fr ;
+}
+
+.characteristics {
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.graphic {
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    display: inline-block;
+    grid-row: 1 / span 2;
+}
