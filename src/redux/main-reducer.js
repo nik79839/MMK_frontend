@@ -1,16 +1,17 @@
 import { mainAPI } from "../api/api";
 import { withCallbacks} from 'redux-signalr';
-import * as axios from "axios";
 
 const SET_CALCULATIONS = 'SET_CALCULATIONS';
-const DELETE_CALCULATION = 'DELETE_CALCULATION';
 const SET_CALCULATIONRESULTINFO = 'SET_CALCULATIONRESULTINFO';
 const UPDATE_PROGRESS = 'UPDATE_PROGRESS';
 
 let initialState = {
-    calculations: [
-        { id: 'iyk', name:'testInitial' , calculationStart: null, calculationEnd: null,progress: null },
-    ],
+    
+    calculations: {
+        calculationAmount: 2,
+        calculations: [
+        { id: 'iyk', name:'testInitial' , calculationEnd: null,progress: null },
+    ]},
 
     calculationResultInfo: {
         processedResult: {
@@ -39,16 +40,16 @@ const mainReducer = (state = initialState, action) => {
                 calculationResultInfo: action.calculationResultInfo
             }
         case UPDATE_PROGRESS:
-            let updatedList = [...state.calculations];
+            let updatedList = [...state.calculations.calculations];
             for (let i=0;i<updatedList.length;i++) {
-                if (updatedList[i].calculationId == action.calculationId)
+                if (updatedList[i].id === action.id)
                     {
                         updatedList[i].progress=action.progress;
                     }
             }   
             return {                                     
                 ...state,
-                calculations: updatedList
+                calculations: {calculations: updatedList}
             }
         default:                                     
             return state;
@@ -82,15 +83,15 @@ export const deleteCalculationById = (id) => {
     }
 }
 
-export const updateProgress = (progress,calculationId) => (
-    { type: UPDATE_PROGRESS,  progress,calculationId  }
+export const updateProgress = (progress,id) => (
+    { type: UPDATE_PROGRESS,  progress,id  }
 )
  
 export const callbacks = withCallbacks()
     .add('SendProgress', (msg,id) => (dispatch) => {
     console.log(msg);
     dispatch (updateProgress(msg,id));
-    if (msg == 100) {
+    if (msg === 100) {
         alert("Расчет завершен");
     }  
   }) 

@@ -1,7 +1,7 @@
 //import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { Select } from 'antd';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 const { Option } = Select;
 
@@ -11,7 +11,7 @@ const GraphicVoltage = (props) => {
     
   const handleVoltageChange = (value) => {
       for (let i=0; i<props.calculationStatistics.length; i++) {
-        if (props.calculationStatistics[i].nodeNumber == value) {
+        if (props.calculationStatistics[i].nodeNumber === value) {
           setVoltage(props.calculationStatistics[i]);
         }
       }

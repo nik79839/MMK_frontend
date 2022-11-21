@@ -1,8 +1,12 @@
 .calculations{
     display: grid;
-    grid-template-columns: 3fr 6fr;   
+    grid-template-columns: 3fr 6fr;
+    padding-left: 10px;
 }
 
+.main{
+    height:750px
+}
 
 
 .messages{

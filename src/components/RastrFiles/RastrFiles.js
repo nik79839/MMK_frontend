@@ -1,4 +1,4 @@
-import { Space, Table, Row, Card,Col, Upload, Button, message } from 'antd';
+import { Table, Row,Col, Upload, Button, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import React from 'react';
 

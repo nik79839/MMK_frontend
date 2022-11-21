@@ -39,7 +39,7 @@ export const getRastrSchemeInfo = () => {
 
 export const startCalculation = (values, token) => {
     return async () => { 
-        let response = await calculationFormAPI.startCalculation(values, token);
+        await calculationFormAPI.startCalculation(values, token);
         //dispatch(setDistricts(response.data));      
     }
 }
