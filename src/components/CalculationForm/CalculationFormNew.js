@@ -60,14 +60,33 @@ const CalculationFormNew = (props) => {
           <Select.Option value={sech.num}>{sech.sechName} </Select.Option>))}
         </Select>
       </Form.Item>
+
+      <Form.Item label="Узлы для контроля напряжения" name='uNodes' rules={[{
+                      required: false},]}>
+                  <Select style={{width: 280,}} showSearch mode='multiple' >
+                  {props.rastrSchemeInfo.districts?.map((district) => (
+                    <Select.OptGroup label={district.name}>
+                    {props.rastrSchemeInfo.nodes?.map((node) => {
+                      if (node.district.name == district.name) return ( 
+                        <Select.Option value={node.number}>{node.name} </Select.Option>)})}
+                    </Select.OptGroup>))}
+
+                    <Select.OptGroup label='Узлы без названия района'>
+                    {props.rastrSchemeInfo.nodes?.map((node) => {
+                      if (node.district.name == '') return ( 
+                        <Select.Option value={node.number}>{node.name}</Select.Option>)})}
+                    </Select.OptGroup>   
+                  </Select>
+                </Form.Item>
+
       
       <div style={{border: "1px solid black", overflowY: "scroll", maxHeight: "240px"}}>
-      <Form.List label="Максимум" name="nodesForWorsening">
+      <Form.List label="Максимум" name="worseningSettings">
         {(fields, { add, remove }) => (
           <>
             {fields.map(({ key, name, ...restField }) => (
               <Space key={key} style={{display: 'flex'}} align="baseline" size = {100}>
-                <Form.Item label="Узел" {...restField} name={[name, 'number']} rules={[{
+                <Form.Item label="Узел" {...restField} name={[name, 'nodeNumber']} rules={[{
                       required: true, message: 'Missing first name',},]}>
                   <Select style={{width: 280,}} showSearch >
                   {props.rastrSchemeInfo.districts?.map((district) => (

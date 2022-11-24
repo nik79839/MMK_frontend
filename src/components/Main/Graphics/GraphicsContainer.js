@@ -14,7 +14,7 @@ const GraphicsContainer = (props) => {
 
     const params = useParams();
     const calculationId = params.id;
-    let index = props.calculations?.calculations.findIndex(item => item.id === calculationId);
+    let index = props.calculations?.calculations.findIndex(item => item.id == calculationId);
 
 
         return  <div className="graphics">
@@ -50,10 +50,10 @@ const GraphicsContainer = (props) => {
                         <GraphicVoltage calculationResultInfo={props.calculationResultInfo.processedResult.voltageResultProcessed}/>
                     </div> 
                 </TabPane>
-                <TabPane tab="Ток" key="2">
+                <TabPane tab="Ток" key="3">
 
                 </TabPane>
-                <TabPane tab="Табличный вид" key="2">
+                <TabPane tab="Табличный вид" key="4">
 
                 </TabPane>
             </Tabs>

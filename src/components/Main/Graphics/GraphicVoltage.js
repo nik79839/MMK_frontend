@@ -7,12 +7,14 @@ const { Option } = Select;
 
 const GraphicVoltage = (props) => { 
 
-  const [voltage, setVoltage] = useState(0)
+  const [voltage, setVoltage] = useState(props?.calculationResultInfo[0])
     
   const handleVoltageChange = (value) => {
-      for (let i=0; i<props.calculationStatistics.length; i++) {
-        if (props.calculationStatistics[i].nodeNumber === value) {
-          setVoltage(props.calculationStatistics[i]);
+    
+    for (let i=0; i<props.calculationResultInfo.length; i++) {
+      if (props.calculationResultInfo[i].nodeNumber == value) {
+          setVoltage(props.calculationResultInfo[i]);
+          
         }
       }
     };
@@ -22,9 +24,8 @@ const GraphicVoltage = (props) => {
           <h4>Напряжение</h4>
           <div className="select">
           Узел: 
-          <Select defaultValue={props.calculationStatistics[0].nodeNumber} style={{width: 120,}} 
-          onChange={handleVoltageChange}>
-        {props.calculationStatistics?.map((voltageResultProcessed) => (
+          <Select defaultValue={props.calculationResultInfo[0].nodeNumber} style={{width: 200,}} onChange={handleVoltageChange}>
+        {props.calculationResultInfo?.map((voltageResultProcessed) => (
           <Option key={voltageResultProcessed.nodeNumber}>{voltageResultProcessed.nodeNumber}</Option>
         ))}
           </Select>
@@ -43,7 +44,7 @@ const GraphicVoltage = (props) => {
           <li>Максимум: {voltage.maximum}</li>
           <li>Минимум: {voltage.minimum}</li>
           <li>Мат ожидание: {voltage.mean}</li>
-          <li>СКО: {props.calculationStatistics.stD}</li>
+          <li>СКО: {props.calculationResultInfo.stD}</li>
           </ul>
 
         </div>

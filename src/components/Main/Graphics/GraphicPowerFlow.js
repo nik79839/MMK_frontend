@@ -5,7 +5,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label } fr
 const GraphicPowerFlow = (props) => { 
         return <div >
           <div className="chart">
-        <BarChart width={600} height={400} data={props.calculationResultInfo.histogramData} margin={{ top: 5, right: 30, left: 20, bottom: 5,}}>
+        <BarChart width={550} height={400} data={props.calculationResultInfo.histogramData} margin={{ top: 5, right: 30, left: 20, bottom: 5,}}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="interval" unit=" МВт">
           </XAxis>
