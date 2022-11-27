@@ -1,7 +1,7 @@
 .graphics{  
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr ;
+    
 }
 
 .characteristics {
@@ -15,9 +15,27 @@
     padding-top: 5px;
 }
 
+.characters {
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
 .graphic {
     box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     display: inline-block;
-    grid-row: 1 / span 2;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+    padding-left: 10px;
+    padding-top: 5px;
+    background-color: white;
+}
+
+.parameters {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    max-height: 240px;
+    font-size: 10pt;
+    margin-top: 10px;
 }

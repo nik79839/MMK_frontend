@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import  CalculationsUID  from './CalculationsUID';
 import { Spin } from 'antd';
 import {useParams } from 'react-router-dom';
+import CalculationsUIDNew from "./CalculationsUIDNew";
 
 const CalculationsUIDContainer = (props) => { 
     

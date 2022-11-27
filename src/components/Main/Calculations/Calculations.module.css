@@ -9,8 +9,9 @@
 }
 
 .calculationsItems{
-    padding: 10px;
-    color: white;   
+    padding: 10px;   
+    overflow: scroll;
+    max-height: 646px;
 }
 .calculationsItems a{
     color: black;   

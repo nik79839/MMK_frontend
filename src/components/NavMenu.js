@@ -6,7 +6,7 @@ import { Menu } from 'antd';
 const NavMenu = (props) => {
 
   return <>
-      <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['home']}>
+      <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['home']} style={{height:"7vh"}}>
         <Menu.Item key="home" > 
           <NavLink tag={Link} className="tags" to="/" style={{ textDecoration: 'none' }}>Расчеты</NavLink>
         </Menu.Item>

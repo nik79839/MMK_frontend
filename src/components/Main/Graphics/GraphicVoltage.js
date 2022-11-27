@@ -1,52 +1,48 @@
-//import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { Select } from 'antd';
 import React, { useState } from 'react';
+import StatisticCharacter from './StatisticCharacter';
+import GraphicProcessed from './GraphicProcessed';
+import GraphicInit from './GraphicInit';
+import s from './Graphics.module.css';
 
 const { Option } = Select;
 
 const GraphicVoltage = (props) => { 
 
-  const [voltage, setVoltage] = useState(props?.calculationResultInfo[0])
+  const [voltage, setVoltage] = useState(props?.calculationResultInfo.processedResult.voltageResultProcessed[0])
+  const [voltageInit, setVoltageInit] = useState(props?.calculationResultInfo.initialResult.voltageResults.
+    filter(item => item.nodeNumber == voltage.nodeNumber))
     
-  const handleVoltageChange = (value) => {
-    
-    for (let i=0; i<props.calculationResultInfo.length; i++) {
-      if (props.calculationResultInfo[i].nodeNumber == value) {
-          setVoltage(props.calculationResultInfo[i]);
-          
+  const handleVoltageChange = (value) => {   
+    for (let i=0; i<props.calculationResultInfo.processedResult.voltageResultProcessed.length; i++) {
+      if (props.calculationResultInfo.processedResult.voltageResultProcessed[i].nodeNumber == value) {
+          setVoltage(props.calculationResultInfo.processedResult.voltageResultProcessed[i]);
         }
       }
+      setVoltageInit(props.calculationResultInfo.initialResult.voltageResults.filter(item => item.nodeNumber == value));
     };
 
         return <div >
           <div className="chart">
-          <h4>Напряжение</h4>
           <div className="select">
           Узел: 
-          <Select defaultValue={props.calculationResultInfo[0].nodeNumber} style={{width: 200,}} onChange={handleVoltageChange}>
-        {props.calculationResultInfo?.map((voltageResultProcessed) => (
-          <Option key={voltageResultProcessed.nodeNumber}>{voltageResultProcessed.nodeNumber}</Option>
-        ))}
+          <Select defaultValue={props.calculationResultInfo.processedResult.voltageResultProcessed[0].nodeName} 
+            style={{width: 200,}} onChange={handleVoltageChange}>
+              {props.calculationResultInfo.processedResult.voltageResultProcessed?.map((voltageResultProcessed) => (
+              <Option key={voltageResultProcessed.nodeNumber}>{voltageResultProcessed.nodeName}</Option>))}
           </Select>
           </div>
-        <BarChart width={500} height={300} data={voltage.histogramData} margin={{ top: 5, right: 30, left: 20, bottom: 5,}}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="interval" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="height" fill="#8884d8" />
-        </BarChart>
-        </div>
-        <div className="characteristics">
-          <ul>
-          <li>Максимум: {voltage.maximum}</li>
-          <li>Минимум: {voltage.minimum}</li>
-          <li>Мат ожидание: {voltage.mean}</li>
-          <li>СКО: {props.calculationResultInfo.stD}</li>
-          </ul>
+          <StatisticCharacter characters = {voltage} measure = "кВ"/>
 
+          <div className={s.graphics}>
+                        <div className={s.graphic}>
+                            <GraphicProcessed calculationResultInfo={voltage} measure = ' кВ'/> 
+                        </div>
+                        <div className={s.graphic}>
+                            <GraphicInit calculationResultInfo={voltageInit} measure = ' кВ' name = 'Напряжение'/>
+                        </div>
+                    </div> 
         </div>
         </div>; 
 }

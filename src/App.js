@@ -16,9 +16,9 @@ function App() {
       <Provider store={store}>
         <BrowserRouter>
         <Layout className="layout">
-        <Header>
+          <Header style={{height:"7vh"}}>
             <div className="logo" />
-            <NavMenu />
+            <NavMenu/>
           </Header>
           <Content>
             <Routes>

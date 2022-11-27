@@ -3,6 +3,7 @@ import  CalculationItem  from './CalculationItem';
 import { Tabs, List } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
 import s from './Calculations.module.css';
+import VirtualList from 'rc-virtual-list';
 
 
 const { TabPane } = Tabs;
@@ -23,25 +24,24 @@ const CalculationsUID = (props) => {
     
     const deleteCalculationById = (id) => {
         props.deleteCalculationById(id);
-       } 
-
+       }
+       
         return <div>
-            <h5>Список расчетов</h5>
             <div>
             <Tabs defaultActiveKey="1">
                 <TabPane tab="Выполнено" key="1">
                     <div className={s.calculationsItems}>
-                    <List bordered = {true} dataSource={calculationReady} itemLayout="horizontal" renderItem={(item) => (
+                    <List split = {true} bordered = {true} itemLayout="horizontal" dataSource={calculationReady} renderItem={(item) => (
                         <List.Item key={item.title} actions={[<DeleteOutlined style={{color: 'blue'}} onClick={() => deleteCalculationById(item.id)}>Удалить</DeleteOutlined>]}>
                             <List.Item.Meta
                                 title={<CalculationItem calculations={item} deleteCalculationById={deleteCalculationById} />}
                                 description={item.calculationEnd}
                             />
                             
-                            {item.sechName != null ? (
-                            <div className={s.sechName}>КС: {item.sechName}</div>): null}
+                            <div className={s.sechName}>КС: {item.sechName}</div>
                         </List.Item>
-                    )}/>             
+                    )} 
+                    />             
                     </div>
                 </TabPane>
             <TabPane tab="В процессе" key="2">

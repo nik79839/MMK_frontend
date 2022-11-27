@@ -2,6 +2,7 @@ import axios from 'axios';
 import './CalculationForm.css';
 import { Form, Input,Button,InputNumber, Select, Row, Card, Space } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+const { TextArea } = Input;
 
 const CalculationFormNew = (props) => {   
   const source = axios.CancelToken.source();
@@ -33,6 +34,9 @@ const CalculationFormNew = (props) => {
             required: true, message: 'Please input your password!',},]}>
         <Input />
       </Form.Item>
+      <Form.Item label="Описание расчета" name="description">
+        <TextArea autoSize={{maxRows: 3,}} maxLength={200}/>
+      </Form.Item>
       <Form.Item label="Файл режима" name="rastrFile" rules={[{
             required: true, message: 'Please input your username!',},]}>
         <Select>
@@ -61,9 +65,8 @@ const CalculationFormNew = (props) => {
         </Select>
       </Form.Item>
 
-      <Form.Item label="Узлы для контроля напряжения" name='uNodes' rules={[{
-                      required: false},]}>
-                  <Select style={{width: 280,}} showSearch mode='multiple' >
+      <Form.Item label="Узлы для контроля напряжения" name='uNodes' >
+                  <Select style={{width: 440,}} showSearch mode='multiple' >
                   {props.rastrSchemeInfo.districts?.map((district) => (
                     <Select.OptGroup label={district.name}>
                     {props.rastrSchemeInfo.nodes?.map((node) => {
@@ -79,8 +82,16 @@ const CalculationFormNew = (props) => {
                   </Select>
                 </Form.Item>
 
+      <Form.Item label="Ветви для контроля тока" name='iBrunches' >
+                  <Select style={{width: 440,}} showSearch mode='multiple' >
+                    {props.rastrSchemeInfo.brunches?.map((brunch) => {
+                      return ( 
+                        <Select.Option value={brunch.name}>{brunch.name} </Select.Option>)})}
+                  </Select>
+                </Form.Item>
+
       
-      <div style={{border: "1px solid black", overflowY: "scroll", maxHeight: "240px"}}>
+      <div style={{ overflowY: "scroll", maxHeight: "240px", boxShadow: '0px 2px 5px 0px rgba(0, 0, 0, 0.5)'}}>
       <Form.List label="Максимум" name="worseningSettings">
         {(fields, { add, remove }) => (
           <>
