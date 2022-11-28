@@ -15,7 +15,7 @@ let reducers = combineReducers({
 
 const connection = new HubConnectionBuilder()
   .configureLogging(LogLevel.Debug)
-  .withUrl('https://localhost:7231/progress', {
+  .withUrl('https://localhost:5001/progress', {
     skipNegotiation: true,
     transport: HttpTransportType.WebSockets,
   })

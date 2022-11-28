@@ -89,7 +89,7 @@ export const updateProgress = (progress,id) => (
  
 export const callbacks = withCallbacks()
     .add('SendProgress', (msg,id) => (dispatch) => {
-    console.log(msg);
+        console.log(msg);
     dispatch (updateProgress(msg,id));
     if (msg === 100) {
         alert("Расчет завершен");

@@ -16,11 +16,11 @@ function App() {
       <Provider store={store}>
         <BrowserRouter>
         <Layout className="layout">
-          <Header style={{height:"7vh"}}>
+          <Header style={{height:"7vh", width: '100%', position: 'sticky', top: 0, zIndex: 1}}>
             <div className="logo" />
             <NavMenu/>
           </Header>
-          <Content>
+          <Content style={{height:"750px"}}>
             <Routes>
                 <Route path="/" element={<Navigate to="/main" />} />
                 <Route path='/main' element={<Main/>}>

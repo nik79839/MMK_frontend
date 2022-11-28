@@ -21,37 +21,34 @@ const CalculationsUID = (props) => {
             calculationProcess.push(props.calculations.calculations[i]);
         }
     }
-    
+    var readyTabText = 'Завершенные расчеты (' + calculationReady.length.toString() + ')';
+
+    var inProgressTabText = 'В процессе (' + calculationProcess.length.toString() + ')';
+
     const deleteCalculationById = (id) => {
         props.deleteCalculationById(id);
        }
        
         return <div>
-            <div>
             <Tabs defaultActiveKey="1">
-                <TabPane tab="Выполнено" key="1">
-                    <div className={s.calculationsItems}>
+                <TabPane tab={readyTabText} key="1">
                     <List split = {true} bordered = {true} itemLayout="horizontal" dataSource={calculationReady} renderItem={(item) => (
-                        <List.Item key={item.title} actions={[<DeleteOutlined style={{color: 'blue'}} onClick={() => deleteCalculationById(item.id)}>Удалить</DeleteOutlined>]}>
+                        <List.Item className={s.calculationsItems} key={item.title} actions={[<DeleteOutlined style={{color: 'blue'}} onClick={() => deleteCalculationById(item.id)}>Удалить</DeleteOutlined>]}>
                             <List.Item.Meta
                                 title={<CalculationItem calculations={item} deleteCalculationById={deleteCalculationById} />}
                                 description={item.calculationEnd}
                             />
-                            
                             <div className={s.sechName}>КС: {item.sechName}</div>
-                        </List.Item>
-                    )} 
+                        </List.Item>)} 
                     />             
-                    </div>
                 </TabPane>
-            <TabPane tab="В процессе" key="2">
+            <TabPane tab={inProgressTabText} key="2">
                 {
                     calculationProcess?.map((calculations) => 
                     (<CalculationProgress calculations={calculations} />)
                 )}
             </TabPane>
-                </Tabs>
-            </div>           
+                </Tabs>           
         </div>; 
 }
 export default CalculationsUID;

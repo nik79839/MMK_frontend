@@ -9,7 +9,8 @@ import { Tabs } from 'antd';
 import s from './Graphics.module.css';
 import {useParams } from 'react-router-dom';
 import StatisticCharacter from "./StatisticCharacter";
-import { Collapse, Tooltip, Col, Row } from 'antd';
+import { Collapse, Tooltip, Divider, Row } from 'antd';
+import GraphicCurrent from "./GraphicCurrent";
 const { Panel } = Collapse;
 
 const { TabPane } = Tabs;
@@ -32,11 +33,8 @@ const GraphicsContainer = (props) => {
 
 
 
-        return  <div className="graphics">
-            <Tooltip title="prompt text" placement="bottom">
-                <h5>Результаты расчета "{props.calculations?.calculations[index]?.name}" </h5>
-            </Tooltip>
-                   
+        return  <div style={{marginLeft: '10px'}}>
+            <Divider >Результаты расчета "{props.calculations?.calculations[index]?.name}" </Divider>                  
             <Tabs defaultActiveKey="1">
                 <TabPane tab="Активная мощность" key="1">
                     <StatisticCharacter characters = {props.calculationResultInfo?.processedResult.powerFlowResultProcessed} measure = 'МВт'/>
@@ -57,16 +55,16 @@ const GraphicsContainer = (props) => {
                     </div> 
                 </TabPane>
                 <TabPane tab="Ток" key="3" disabled = {isExistCurrent}>
-
+                    <GraphicCurrent calculationResultInfo={props.calculationResultInfo}/>
                 </TabPane>
             </Tabs>
             <div className = {s.parameters}>
                     <div className={s.graphic}>
-                        <h6>Описание расчета</h6>
+                    <Divider >Описание расчета</Divider>
                         <label>{props.calculations?.calculations[index]?.description}</label>                     
                     </div>
                     <div className={s.graphic}>
-                            <h6>Параметры расчета</h6>
+                    <Divider >Параметры расчета</Divider>
                             <ul>
                                 <li>Количество реализаций: {props.calculationResultInfo?.initialResult.powerFlowResults.length}</li>
                                 <li>Файл режима: {props.calculations?.calculations[index].pathToRegim}</li>
@@ -75,7 +73,7 @@ const GraphicsContainer = (props) => {
                             </ul>                       
                     </div>
                     <div className={s.graphic}>
-                        <h6>Узлы для утяжеления</h6>                      
+                        <Divider >Узлы для утяжеления</Divider>                      
                     </div>
                     </div>
             </div>

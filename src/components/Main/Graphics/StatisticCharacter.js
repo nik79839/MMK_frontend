@@ -5,7 +5,7 @@ import s from './Graphics.module.css';
 
 const StatisticCharacter = (props) => (
   <div className="site-statistic-demo-card">
-    <Row gutter={16} style={{height:"14vh", marginLeft:'2px', marginRight:'2px', verticalAlign: 'text-top'}}>
+    <Row gutter={16} style={{height:"14vh", marginRight:'2px', verticalAlign: 'text-top'}}>
       <Col span={6}>
         <Card bordered={false} style={{height:"12vh"}} className={s.characters}>
           <Statistic title="Мат ожидание" value={props.characters.mean} precision={2} valueStyle={{color: '#3f8600',}} suffix={props.measure}/>

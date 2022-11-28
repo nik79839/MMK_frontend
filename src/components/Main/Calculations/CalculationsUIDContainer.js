@@ -24,7 +24,7 @@ const CalculationsUIDContainer = (props) => {
             <div>
                 <CalculationsUID calculations={props.calculations} deleteCalculationById={props.deleteCalculationById}/>
             </div>
-            {(props.calculations[0]?.id == 'iyk') && (<Spin />)}
+            {(props.calculations.calculations[0]?.id == 'iyk') && (<Spin />)}
             </> 
 }
 
