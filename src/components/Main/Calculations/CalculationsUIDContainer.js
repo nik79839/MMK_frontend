@@ -3,7 +3,7 @@ import { compose } from "redux";
 import { getCalculations, getCalculationResultInfoById, deleteCalculationById } from '../../../redux/main-reducer';
 import { connect } from 'react-redux';
 import  CalculationsUID  from './CalculationsUID';
-import { Spin } from 'antd';
+import { Spin, Divider } from 'antd';
 import {useParams } from 'react-router-dom';
 import CalculationsUIDNew from "./CalculationsUIDNew";
 

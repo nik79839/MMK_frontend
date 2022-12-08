@@ -12,8 +12,6 @@
     padding: 10px;   
     overflow:auto;
     max-height: 646px;
-    background-color: white;
-    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
 }
 .calculationsItems a{
     color: black;   
@@ -25,4 +23,14 @@
 
 .sechName{
     color:gray
+}
+
+.full {
+    background-color: white;
+    height: 740px;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    margin-top: 7px;
+    padding-left: 15px;
+    padding-right: 5px;
 }

@@ -33,9 +33,9 @@ const GraphicsContainer = (props) => {
 
 
 
-        return  <div style={{marginLeft: '10px'}}>
+        return  <div className={s.full}>
             <Divider >Результаты расчета "{props.calculations?.calculations[index]?.name}" </Divider>                  
-            <Tabs defaultActiveKey="1">
+            <Tabs defaultActiveKey="1" >
                 <TabPane tab="Активная мощность" key="1">
                     <StatisticCharacter characters = {props.calculationResultInfo?.processedResult.powerFlowResultProcessed} measure = 'МВт'/>
                     <div className={s.graphics}>

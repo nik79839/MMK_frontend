@@ -1,3 +1,9 @@
+.full {
+    margin-left: 10px;
+    padding-left: 7px;
+    border-left: 1px solid rgb(221, 218, 218);
+}
+
 .graphics{  
     display: grid;
     grid-template-columns: 1fr 1fr;

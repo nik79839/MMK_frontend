@@ -1,11 +1,11 @@
 import  CalculationProgress  from './CalculationProgress';
 import  CalculationItem  from './CalculationItem';
-import { Tabs, List } from 'antd';
+import { Tabs, List, Button, Input } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
 import s from './Calculations.module.css';
 import VirtualList from 'rc-virtual-list';
 
-
+const { Search } = Input;
 const { TabPane } = Tabs;
 
 const CalculationsUID = (props) => { 
@@ -28,11 +28,14 @@ const CalculationsUID = (props) => {
     const deleteCalculationById = (id) => {
         props.deleteCalculationById(id);
        }
+
+       const onSearch = (value) => console.log(value);
+       const operations = <Search placeholder="Поиск" onSearch={onSearch} enterButton style={{width: '170px'}} />;
        
-        return <div>
-            <Tabs defaultActiveKey="1">
+        return <div className={s.full}>
+            <Tabs defaultActiveKey="1" tabBarExtraContent={operations}>
                 <TabPane tab={readyTabText} key="1">
-                    <List split = {true} bordered = {true} itemLayout="horizontal" dataSource={calculationReady} renderItem={(item) => (
+                    <List itemLayout="horizontal" dataSource={calculationReady} renderItem={(item) => (
                         <List.Item className={s.calculationsItems} key={item.title} actions={[<DeleteOutlined style={{color: 'blue'}} onClick={() => deleteCalculationById(item.id)}>Удалить</DeleteOutlined>]}>
                             <List.Item.Meta
                                 title={<CalculationItem calculations={item} deleteCalculationById={deleteCalculationById} />}
@@ -48,6 +51,7 @@ const CalculationsUID = (props) => {
                     (<CalculationProgress calculations={calculations} />)
                 )}
             </TabPane>
+            <a>edsg</a>
                 </Tabs>           
         </div>; 
 }
