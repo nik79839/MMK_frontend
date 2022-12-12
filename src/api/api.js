@@ -31,3 +31,18 @@ export const rastrFilesAPI = {
     }
 }
 
+export const authAPI = {
+    auth(values) {
+        return axios.post('https://localhost:5001/api/auth',values,{headers: {"Content-Type": "multipart/form-data"}}); //
+    },
+    whoAmI() {
+        return axios.get('https://localhost:5001/api/whoAmI',{headers: authHeader()});
+    }
+}
+
+export const authHeader = () => {
+    const token = localStorage.getItem('token');
+    //if (token) {
+    return {Authorization: 'Bearer ' + token};
+}
+

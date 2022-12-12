@@ -6,11 +6,13 @@ import RastrFilesReducer from './rastrFiles-reducer'
 
 import {callbacks} from "./main-reducer";
 import { HubConnectionBuilder, LogLevel, HttpTransportType, signalMiddleware} from 'redux-signalr';
+import authReducer from "./auth-reducer";
 
 let reducers = combineReducers({
     mainPage: mainReducer,
     calculationFormPage: CalculationFormReducer,
     rastrFilesPage: RastrFilesReducer,
+    auth: authReducer
 });
 
 const connection = new HubConnectionBuilder()

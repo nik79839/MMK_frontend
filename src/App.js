@@ -9,6 +9,7 @@ import { Layout } from 'antd';
 import 'antd/dist/antd.min.css';
 import RastrFilesContainer from "./components/RastrFiles/RastrFilesContainer";
 import { Navigate } from 'react-router-dom';
+import AuthContainer from "./components/Auth/AuthContainer";
 const { Header, Content } = Layout;
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
                 </Route>
                 <Route exact path='/counter' element={<CalculationFormContainer/>} />
                 <Route exact path='/rastrFiles' element={<RastrFilesContainer/>} />
+                <Route exact path='/auth' element={<AuthContainer/>} />
             </Routes>
             </Content>
         </Layout>
