@@ -4,7 +4,7 @@ const SET_USER = 'SET_USER';
 
 let initialState = {
     isAuth: false,
-    user: {name: null, surName: null, lastName: null, post: null, token: null, login: null}
+    user: {name: localStorage.getItem('user'), token: localStorage.getItem('token')}
 };
 
 const authReducer = (state = initialState, action) => { 
@@ -27,8 +27,9 @@ export const setUser = (user) => (
 export const getUser = (values) => {
     return async (dispatch) => { 
         let response = await authAPI.auth(values);
-        if (response.status == 200 && response.data.token != null) {
+        if (response.status == 200 && response.data != null) {
             localStorage.setItem("token", response.data.token);
+            localStorage.setItem("user", response.data.name);
             dispatch(setUser(response.data));
         }
         if (response.status == 400) {

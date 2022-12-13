@@ -2,13 +2,13 @@ import * as axios from "axios";
 
 export const mainAPI = {
     getCalculations() {
-        return axios.get('https://localhost:5001/api/CalculationPowerFlows/GetCalculations'); //
+        return axios.get('https://localhost:5001/api/Calculations/GetCalculations'); //
     },
     getCalculationStatisticById(id) {
-        return axios.get('https://localhost:5001/api/CalculationPowerFlows/GetCalculations/'+id); //
+        return axios.get('https://localhost:5001/api/Calculations/GetCalculations/'+id); //
     },
     deleteCalculationById(id) {
-        return axios.delete('https://localhost:5001/api/CalculationPowerFlows/DeleteCalculations/'+id); //
+        return axios.delete('https://localhost:5001/api/Calculations/DeleteCalculations/'+id); //
     },
 }
 
@@ -17,7 +17,7 @@ export const calculationFormAPI = {
         return axios.get('https://localhost:5001/api/RastrSchemeInfo/GetRastrSchemeInfo'); //
     },
     startCalculation(values, cancelToken) {
-        return axios.post("https://localhost:5001/api/CalculationPowerFlows/PostCalculations",values, 
+        return axios.post("https://localhost:5001/api/Calculations/PostCalculations",values, 
         {headers: { "Content-Type": "application/json"}, cancelToken: cancelToken});
     }
 }
@@ -33,10 +33,10 @@ export const rastrFilesAPI = {
 
 export const authAPI = {
     auth(values) {
-        return axios.post('https://localhost:5001/api/auth',values,{headers: {"Content-Type": "multipart/form-data"}}); //
+        return axios.post('https://localhost:5001/api/Auth/auth',values); //
     },
     whoAmI() {
-        return axios.get('https://localhost:5001/api/whoAmI',{headers: authHeader()});
+        return axios.get('https://localhost:5001/api/Auth/whoAmI',{headers: authHeader()});
     }
 }
 

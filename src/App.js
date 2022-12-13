@@ -24,10 +24,10 @@ function App() {
           <Content style={{height:"750px"}}>
             <Routes>
                 <Route path="/" element={<Navigate to="/main" />} />
-                <Route path='/main' element={<Main/>}>
-                  <Route path=':id' element={<Main/>}/>
+                <Route path='/main' element={<RequireAuth><Main/></RequireAuth>}>
+                  <Route path=':id' element={<RequireAuth><Main/></RequireAuth>}/>
                 </Route>
-                <Route exact path='/counter' element={<CalculationFormContainer/>} />
+                <Route exact path='/counter' element={<RequireAuth><CalculationFormContainer/></RequireAuth>} />
                 <Route exact path='/rastrFiles' element={<RastrFilesContainer/>} />
                 <Route exact path='/auth' element={<AuthContainer/>} />
             </Routes>
@@ -37,5 +37,12 @@ function App() {
       </Provider>
   );
 }
+
+const RequireAuth = ({ children }) => {
+  if (localStorage.getItem('user') == null) {
+     return <AuthContainer />;
+  }
+  return children;
+};
 
 export default App;
