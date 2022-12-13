@@ -37,7 +37,13 @@ export const authAPI = {
     },
     whoAmI() {
         return axios.get('https://localhost:5001/api/Auth/whoAmI',{headers: authHeader()});
-    }
+    },
+    getUsers() {
+        return axios.get('https://localhost:5001/api/Auth/GetUsers'); //
+    },
+    createUser(values) {
+        return axios.post('https://localhost:5001/api/Auth/CreateUser',values); //
+    },
 }
 
 export const authHeader = () => {

@@ -22,7 +22,10 @@ const NavMenu = (props) => {
         <Menu.Item key="files" > 
           <NavLink tag={Link} className="text-white" to="/rastrFiles" style={{ textDecoration: 'none' }}>Режимы</NavLink>
         </Menu.Item>
-        <Menu.SubMenu title='Отрашевский Никита Александрович' icon={<UserOutlined/>} style={{float:'right',marginLeft:'auto'}}>
+        <Menu.Item key="users" > 
+          <NavLink tag={Link} className="text-white" to="/users" style={{ textDecoration: 'none' }}>Пользователи</NavLink>
+        </Menu.Item>
+        <Menu.SubMenu title={localStorage.getItem('user')} icon={<UserOutlined/>} style={{float:'right',marginLeft:'auto'}}>
         <Menu.Item icon={<LogoutOutlined />} >
           <a onClick={logout} href='/'>Выйти</a>
           </Menu.Item>

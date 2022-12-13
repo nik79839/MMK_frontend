@@ -1,10 +1,11 @@
 import { authAPI } from "../api/api";
 
 const SET_USER = 'SET_USER';
+const SET_USERS = 'SET_USERS';
 
 let initialState = {
-    isAuth: false,
-    user: {name: localStorage.getItem('user'), token: localStorage.getItem('token')}
+    user: {name: localStorage.getItem('user'), token: localStorage.getItem('token')},
+    users: [{name:null, login: null,post: null}]
 };
 
 const authReducer = (state = initialState, action) => { 
@@ -12,8 +13,12 @@ const authReducer = (state = initialState, action) => {
         case SET_USER:
             return {                                     
                 ...state,
-                isAuth: true,
                 user: action.user
+            }
+        case SET_USERS:
+            return {                                     
+                ...state,
+                users: action.users
             }
         default:                                     
             return state;
@@ -35,6 +40,23 @@ export const getUser = (values) => {
         if (response.status == 400) {
             throw "Указаны неверные имя пользователя или пароль"
         }        
+    }
+}
+
+export const setUsers = (users) => (
+    { type: SET_USERS,  users  }
+)
+export const getUsers = () => {
+    return async (dispatch) => { 
+        let response = await authAPI.getUsers();
+        dispatch(setUsers(response.data));      
+    }
+}
+
+export const createUser = (user) => {
+    return async (dispatch) => { 
+        await authAPI.createUser(user);
+        getUsers();     
     }
 }
 

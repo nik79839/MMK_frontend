@@ -31,7 +31,6 @@ export const getRastrFiles = () => {
 }
 export const postRastrFiles = (file) => {
     return async (dispatch) => { 
-        debugger;
         let response = await rastrFilesAPI.postRastrFiles(file);
         if (response.status === 200) {     
         dispatch(setRastrFiles(response.data));}      
