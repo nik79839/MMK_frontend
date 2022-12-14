@@ -1,7 +1,7 @@
 import  CalculationProgress  from './CalculationProgress';
 import  CalculationItem  from './CalculationItem';
-import { Tabs, List, Button, Input } from 'antd';
-import { DeleteOutlined } from '@ant-design/icons';
+import { Tabs, List, Button, Input} from 'antd';
+import { DeleteOutlined, CloseOutlined  } from '@ant-design/icons';
 import s from './Calculations.module.css';
 import VirtualList from 'rc-virtual-list';
 
@@ -43,13 +43,14 @@ const CalculationsUID = (props) => {
                             />
                             <div className={s.sechName}>КС: {item.sechName}</div>
                         </List.Item>)} 
-                    />             
+                    />          
                 </TabPane>
             <TabPane tab={inProgressTabText} key="2">
-                {
-                    calculationProcess?.map((calculations) => 
-                    (<CalculationProgress calculations={calculations} />)
-                )}
+                <List itemLayout="horizontal" dataSource={calculationProcess} renderItem={(item) => (
+                        <List.Item className={s.calculationsItems} key={item.title} actions={[<CloseOutlined  style={{color: 'red'}}>Удалить</CloseOutlined >]}>
+                            <List.Item.Meta title={<CalculationProgress calculations={item} />}/>
+                        </List.Item>)} 
+                    /> 
             </TabPane>
             <a>edsg</a>
                 </Tabs>           

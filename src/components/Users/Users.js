@@ -20,13 +20,19 @@ const columns = [
     title: 'Логин',
     dataIndex: 'login',
     key: 'login',
-    width: '20%'
+    width: '15%'
   },
   {
     title: 'Должность',
     dataIndex: 'post',
     key: 'post',
-    width: '40%'
+    width: '35%'
+  },
+  {
+    title: 'Роль',
+    dataIndex: 'вап',
+    key: 'авпв',
+    width: '15%'
   },
   {
     title: ' ',

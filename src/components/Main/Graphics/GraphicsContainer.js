@@ -31,8 +31,6 @@ const GraphicsContainer = (props) => {
         isExistVoltage = true;
     }
 
-
-
         return  <div className={s.full}>
             <Divider >Результаты расчета "{props.calculations?.calculations[index]?.name}" </Divider>                  
             <Tabs defaultActiveKey="1" >
@@ -73,7 +71,8 @@ const GraphicsContainer = (props) => {
                             </ul>                       
                     </div>
                     <div className={s.graphic}>
-                        <Divider >Узлы для утяжеления</Divider>                      
+                        <Divider >Узлы для утяжеления</Divider>
+                        {props.calculations?.calculations[index].worseningSettings.map(a => a.nodeNumber).filter((v, i, a) => a.indexOf(v) === i).join(", ")}                      
                     </div>
                     </div>
             </div>

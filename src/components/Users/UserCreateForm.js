@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Form, Input, Modal, Radio } from 'antd';
+import { Button, Form, Input, Modal, Select } from 'antd';
 const UserCreateForm = ({ open, onCreate, onCancel }) => {
   const [form] = Form.useForm();
   return (
@@ -11,7 +11,7 @@ const UserCreateForm = ({ open, onCreate, onCancel }) => {
           })
           .catch((info) => {console.log('Validate Failed:', info);});
       }}>
-      <Form form={form} layout="vertical" name="form_in_modal" initialValues={{modifier: 'public',}}>
+      <Form size='small' form={form} layout="vertical" name="form_in_modal" initialValues={{modifier: 'public',}}>
         <Form.Item name="name" label="Имя" rules={[{required: true, message: 'Введите имя',},]}>
           <Input />
         </Form.Item>
@@ -23,6 +23,9 @@ const UserCreateForm = ({ open, onCreate, onCancel }) => {
         </Form.Item>
         <Form.Item name="post" label="Должность" rules={[{required: true, message: 'Введите должность',},]}>
           <Input type="textarea" />
+        </Form.Item>
+        <Form.Item name="ы" label="Роль" rules={[{required: true, message: 'Введите должность',},]}>
+          <Select />
         </Form.Item>
         <Form.Item name="login" label="Логин" rules={[{required: true, message: 'Введите логин',},]}>
           <Input type="textarea" />
