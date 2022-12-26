@@ -3,7 +3,6 @@ import { compose } from "redux";
 import { getRastrFiles } from '../../redux/rastrFiles-reducer';
 import { connect } from 'react-redux';
 import  RastrFiles  from './RastrFiles';
-import './RastrFiles.css'
 
 const RastrFilesContainer = (props) => { 
     useEffect(  () => {

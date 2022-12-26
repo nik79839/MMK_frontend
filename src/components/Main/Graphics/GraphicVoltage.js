@@ -10,27 +10,27 @@ const { Option } = Select;
 
 const GraphicVoltage = (props) => { 
 
-  const [voltage, setVoltage] = useState(props?.calculationResultInfo.processedResult.voltageResultProcessed[0])
-  const [voltageInit, setVoltageInit] = useState(props?.calculationResultInfo.initialResult.voltageResults.
-    filter(item => item.nodeNumber == voltage.nodeNumber))
+  const [voltage, setVoltage] = useState(props?.calculationResultInfo.voltageResultProcessed[0])
+  const [voltageInit, setVoltageInit] = useState(props?.calculationResultInfo.voltageResults.
+    filter(item => item.nodeName == voltage.nodeName))
     
   const handleVoltageChange = (value) => {   
-    for (let i=0; i<props.calculationResultInfo.processedResult.voltageResultProcessed.length; i++) {
-      if (props.calculationResultInfo.processedResult.voltageResultProcessed[i].nodeNumber == value) {
-          setVoltage(props.calculationResultInfo.processedResult.voltageResultProcessed[i]);
+    for (let i=0; i<props.calculationResultInfo.voltageResultProcessed.length; i++) {
+      if (props.calculationResultInfo.voltageResultProcessed[i].nodeName == value) {
+          setVoltage(props.calculationResultInfo.voltageResultProcessed[i]);
         }
       }
-      setVoltageInit(props.calculationResultInfo.initialResult.voltageResults.filter(item => item.nodeNumber == value));
+      setVoltageInit(props.calculationResultInfo.voltageResults.filter(item => item.nodeName == value));
     };
 
         return <div >
           <div className="chart">
           <div className="select">
           Узел: 
-          <Select defaultValue={props.calculationResultInfo.processedResult.voltageResultProcessed[0].nodeName} 
+          <Select defaultValue={props.calculationResultInfo.voltageResultProcessed[0].nodeName} 
             style={{width: 200,}} onChange={handleVoltageChange}>
-              {props.calculationResultInfo.processedResult.voltageResultProcessed?.map((voltageResultProcessed) => (
-              <Option key={voltageResultProcessed.nodeNumber}>{voltageResultProcessed.nodeName}</Option>))}
+              {props.calculationResultInfo.voltageResultProcessed?.map((voltageResultProcessed) => (
+              <Option value={voltageResultProcessed.nodeName}>{voltageResultProcessed.nodeName}</Option>))}
           </Select>
           </div>
           <StatisticCharacter characters = {voltage} measure = "кВ"/>

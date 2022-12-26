@@ -12,6 +12,7 @@ import { Navigate } from 'react-router-dom';
 import AuthContainer from "./components/Auth/AuthContainer";
 import Users from './components/Users/Users';
 import UsersContainer from './components/Users/UsersContainer';
+import NavMenuContainer from './components/NavMenu/NavMenuContainer';
 const { Header, Content } = Layout;
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
         <BrowserRouter>
         <Layout className="layout">
           <Header style={{height:"7vh", width: '100%', position: 'sticky', top: 0, zIndex: 1}}>
-            <NavMenu/>
+            <NavMenuContainer/>
           </Header>
           <Content style={{height:"750px"}}>
             <Routes>

@@ -39,7 +39,7 @@ const columns = [
     key: 'action',
     render: (_, record) => (
         <Popconfirm title="Подвердите удаление" onConfirm={() => handleDelete(record.key)}>
-        <a>{<DeleteOutlined/>}</a>
+        <a>{<DeleteOutlined style={{color: 'blue'}}/>}</a>
         </Popconfirm>
     ),
   },

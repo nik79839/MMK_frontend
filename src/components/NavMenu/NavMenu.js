@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { Menu, Space,SubMenu } from 'antd';
-import { MenuOutlined, UserOutlined, LogoutOutlined } from '@ant-design/icons';
+import { MenuOutlined, UserOutlined, LogoutOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 
 const NavMenu = (props) => {
 
@@ -24,6 +24,9 @@ const NavMenu = (props) => {
         </Menu.Item>
         <Menu.Item key="users" > 
           <NavLink tag={Link} className="text-white" to="/users" style={{ textDecoration: 'none' }}>Пользователи</NavLink>
+        </Menu.Item>
+        <Menu.Item key="help" > 
+          <QuestionCircleOutlined />
         </Menu.Item>
         <Menu.SubMenu title={localStorage.getItem('user')} icon={<UserOutlined/>} style={{float:'right',marginLeft:'auto'}}>
         <Menu.Item icon={<LogoutOutlined />} >

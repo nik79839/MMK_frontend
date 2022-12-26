@@ -10,26 +10,26 @@ const { Option } = Select;
 
 const GraphicCurrent = (props) => { 
 
-  const [current, setCurrent] = useState(props?.calculationResultInfo.processedResult.currentResultProcessed[0])
-  const [currentInit, setCurrentInit] = useState(props?.calculationResultInfo.initialResult.currentResults.
+  const [current, setCurrent] = useState(props?.calculationResultInfo.currentResultProcessed[0])
+  const [currentInit, setCurrentInit] = useState(props?.calculationResultInfo.currentResults.
     filter(item => item.brunchName == current.brunchName))
     
   const handleVoltageChange = (value) => {   
-    for (let i=0; i<props?.calculationResultInfo.processedResult.currentResultProcessed.length; i++) {
-      if (props?.calculationResultInfo.processedResult.currentResultProcessed[i].brunchName == value) {
-        setCurrent(props?.calculationResultInfo.processedResult.currentResultProcessed[i]);
+    for (let i=0; i<props?.calculationResultInfo.currentResultProcessed.length; i++) {
+      if (props?.calculationResultInfo.currentResultProcessed[i].brunchName == value) {
+        setCurrent(props?.calculationResultInfo.currentResultProcessed[i]);
         }
       }
-      setCurrentInit(props?.calculationResultInfo.initialResult.currentResults.filter(item => item.brunchName == value));
+      setCurrentInit(props?.calculationResultInfo.currentResults.filter(item => item.brunchName == value));
     };
 
         return <div >
           <div className="chart">
           <div className="select">
           Узел: 
-          <Select defaultValue={props?.calculationResultInfo?.processedResult.currentResultProcessed[0]?.brunchName} 
+          <Select defaultValue={props?.calculationResultInfo?.currentResultProcessed[0]?.brunchName} 
             style={{width: 200,}} onChange={handleVoltageChange}>
-              {props.calculationResultInfo.processedResult.currentResultProcessed?.map((currentResultProcessed) => (
+              {props.calculationResultInfo.currentResultProcessed?.map((currentResultProcessed) => (
               <Option key={currentResultProcessed.brunchName}>{currentResultProcessed.brunchName}</Option>))}
           </Select>
           </div>

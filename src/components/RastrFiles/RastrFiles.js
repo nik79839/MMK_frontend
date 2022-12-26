@@ -1,6 +1,7 @@
-import { Table, Row,Col, Upload, Button, message } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
+import { Table, Row,Col, Upload, Button, message, Popconfirm, Space } from 'antd';
+import { UploadOutlined, DownloadOutlined, DeleteOutlined } from '@ant-design/icons';
 import React from 'react';
+import s from './RastrFiles.module.css';
 
 const columns = [
     {
@@ -12,7 +13,20 @@ const columns = [
       title: 'Время последнего изменения',
       dataIndex: 'lastModified',
       key: 'lastModified',
-    }]
+      
+    },
+    {
+      title: ' ',
+      key: 'action',
+      render: (_, record) => (
+          <Space>
+          <a>{<DownloadOutlined style={{color: 'blue'}}/>}</a>
+          <Popconfirm title="Подвердите удаление">
+            <a>{<DeleteOutlined style={{color: 'red'}}/>}</a>
+          </Popconfirm>
+          </Space>
+      ),
+    },]
 
 const RastrFiles = (props) => { 
 
@@ -28,18 +42,12 @@ const RastrFiles = (props) => {
         }
       }
 
-    return <>
-    <Row >
-        <Col span="21" >
-            <Table columns={columns} dataSource={props.rastrFiles} />;
-        </Col>
-        <Col span="3" >
-        <Upload name ='file' accept=".rg2" action = 'https://localhost:7231/RastrFiles/PostRastrFiles' onChange={onChange} >
-    <Button icon={<UploadOutlined />}>Click to Upload</Button>
-  </Upload>
-  </Col>
-    </Row>
-    </>
-}
+    return (
+    <div className={s.table}>
+            <Table columns={columns} dataSource={props.rastrFiles} />   
+            <Upload name ='file' accept=".rg2" action = 'https://localhost:7231/RastrFiles/PostRastrFiles' onChange={onChange} >
+              <Button style={{float: 'right', marginLeft: '775px'}} type="primary" icon={<UploadOutlined />}>Загрузить файл режима</Button>
+            </Upload>
+    </div>)}
 
 export default RastrFiles

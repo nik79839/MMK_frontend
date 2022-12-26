@@ -2,6 +2,7 @@ import axios from 'axios';
 import './CalculationForm.css';
 import { Form, Input,Button,InputNumber, Select, Row, Card, Space, message } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import {useNavigate} from "react-router-dom"
 const { TextArea } = Input;
 
 const CalculationFormNew = (props) => {   
@@ -12,6 +13,8 @@ const CalculationFormNew = (props) => {
     return ev.returnValue = 'Are you sure you want to close?';
 });
 
+let navigate = useNavigate();
+
   const abortZ = () => {
     source.cancel();
     console.log("Cancel");
@@ -20,7 +23,8 @@ const CalculationFormNew = (props) => {
   const onFinish = (values) => {
     console.log('Success:', values);
     props.startCalculation(values, source.token);
-    message.loading('Расчет начат')
+    message.loading('Расчет начат');
+    navigate("/");
   };
 
         return <div >
@@ -98,8 +102,8 @@ const CalculationFormNew = (props) => {
         {(fields, { add, remove }) => (
           <>
           <Form.Item>
-              <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />} style ={{marginLeft: '50px'}}>
-                Add field
+              <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />} style ={{marginLeft: '80px'}}>
+                Добавить узел
               </Button>
             </Form.Item>
             {fields.map(({ key, name, ...restField }) => (
