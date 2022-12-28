@@ -1,0 +1,21 @@
+version: "3"
+services:
+    client:
+      build: .
+      ports:
+        - "3000:3000"
+      volumes:
+        - ./src:/app/src
+    postgres:
+      image: postgres:latest
+      environment:
+        POSTGRES_DB: "VKR"
+        POSTGRES_USER: "dbuser"
+        POSTGRES_PASSWORD: "dbpwd"
+        PGDATA: "/var/lib/postgresql/data/pgdata"
+      volumes:
+        - ../2. Init Database:/docker-entrypoint-initdb.d
+        - .:/var/lib/postgresql/data
+      ports:
+        - "5432:5432"
+
