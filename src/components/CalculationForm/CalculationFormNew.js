@@ -36,14 +36,14 @@ let navigate = useNavigate();
         name: '',
       }}>
       <Form.Item label="Название расчета" name="name" rules={[{
-            required: true, message: 'Please input your password!',},]}>
+            required: true, message: 'Введите название расчета!',},]}>
         <Input />
       </Form.Item>
       <Form.Item label="Описание расчета" name="description">
         <TextArea autoSize={{maxRows: 3,}} maxLength={200}/>
       </Form.Item>
       <Form.Item label="Файл режима" name="rastrFile" rules={[{
-            required: true, message: 'Please input your username!',},]}>
+            required: true, message: 'Выберите файл режима!',},]}>
         <Select>
         {props.rastrFiles?.map((rastrFile) => (
           <Select.Option value={rastrFile.name}>{rastrFile.name} </Select.Option>
@@ -51,19 +51,19 @@ let navigate = useNavigate();
         </Select>
       </Form.Item>
       <Form.Item label="Количество реализаций" name="countOfImplementations" rules={[{
-            required: true, message: 'Please input your username!',},]}>
+            required: true, message: 'Введите количество реализаций!',},]}>
         <InputNumber min={1} max={1000} />
       </Form.Item>
       <Form.Item label="Случайное приращение нагрузок" name="percentForWorsening" rules={[{
-            required: true, message: 'Please input your username!',},]}>
+            required: true, message: 'Введите значение!',},]}>
         <InputNumber min={1} max={100} formatter={(value) => `${value}%`} parser={(value) => value.replace('%', '')} />
       </Form.Item>
       <Form.Item label="Начальное состояние нагрузок" name="percentLoad" rules={[{
-            required: true, message: 'Please input your username!',},]}>
+            required: true, message: 'Введите значение!',},]}>
         <InputNumber min={0} max={200} formatter={(value) => `${value}%`} parser={(value) => value.replace('%', '')}/>
       </Form.Item>
       <Form.Item label="Контролируемое сечение" name="sechNumber" rules={[{
-            required: true, message: 'Please input your username!',},]}>
+            required: true, message: 'Выберите сечение!',},]}>
         <Select>
           {props.rastrSchemeInfo.seches?.map((sech) => (
           <Select.Option value={sech.num}>{sech.sechName} </Select.Option>))}

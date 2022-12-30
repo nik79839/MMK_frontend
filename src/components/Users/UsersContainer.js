@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { compose } from "redux";
 import { getUsers, createUser } from '../../redux/auth-reducer';
 import { connect } from 'react-redux';
@@ -6,8 +6,11 @@ import Users from "./Users";
 
 const UsersContainer = React.memo((props) => {
 
+    const [spin, setSpin] = useState(true);
+    
     useEffect(() => {
-        props.getUsers();  
+        props.getUsers();
+        setSpin(false);
     },[])
 
     const createUser = (user) => {
@@ -16,7 +19,7 @@ const UsersContainer = React.memo((props) => {
 
     return(  
         <div>
-            <Users users={props.users} createUser={createUser}/>
+            <Users users={props.users} createUser={createUser} spin={spin}/>
         </div>  )           
 })
 

@@ -55,7 +55,7 @@ const Users = (props) => {
 
     return (
         <div className={s.table}>
-            <Table  columns={columns} dataSource={props.users.users} bordered title={() => 'Список пользователей'} />
+            <Table loading={props.spin}  columns={columns} dataSource={props.users.users} bordered title={() => 'Список пользователей'} />
             <Button style={{float: 'right'}} type="primary" onClick={() => {setOpen(true);}}>Добавить</Button>
             <UserCreateForm open={open} onCreate={onCreate} onCancel={() => {setOpen(false);}}/>
         </div>)}

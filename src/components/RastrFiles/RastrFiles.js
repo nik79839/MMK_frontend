@@ -44,7 +44,7 @@ const RastrFiles = (props) => {
 
     return (
     <div className={s.table}>
-            <Table columns={columns} dataSource={props.rastrFiles} />   
+            <Table loading={props.spin} columns={columns} dataSource={props.rastrFiles} />   
             <Upload name ='file' accept=".rg2" action = 'https://localhost:7231/RastrFiles/PostRastrFiles' onChange={onChange} >
               <Button style={{float: 'right', marginLeft: '775px'}} type="primary" icon={<UploadOutlined />}>Загрузить файл режима</Button>
             </Upload>

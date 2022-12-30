@@ -2,17 +2,26 @@
     color: brown;
 }
 
-.active {
-    font-size:larger;
-    font-weight:bolder;
-    background-color:azure
+.activeItemList{
+    padding: 5px;   
+    overflow:auto;
+    max-height: 646px;
+    background-color:rgb(226, 240, 252);
 }
-
 .calculationsItems{
-    padding: 10px;   
+    padding: 5px;   
     overflow:auto;
     max-height: 646px;
 }
+
+.active {
+    font-size:larger;
+    font-weight:bolder;
+    color:darkblue;
+    padding-left: 5px;
+}
+
+
 .calculationsItems a{
     color: black;   
     text-decoration: none;
@@ -31,6 +40,6 @@
     box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
     border-radius: 20px;
     margin-top: 7px;
-    padding-left: 15px;
+    padding-left: 12px;
     padding-right: 5px;
 }

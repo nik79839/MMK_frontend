@@ -65,14 +65,14 @@ const GraphicsContainer = (props) => {
                     <Divider >Параметры расчета</Divider>
                             <ul>
                                 <li>Количество реализаций: {props.calculationResultInfo?.powerFlowResults.length}</li>
-                                <li>Файл режима: {props.calculations?.calculations[index].pathToRegim}</li>
-                                <li>Процент случайного утяжеления: {props.calculations?.calculations[index].percentForWorsening} %</li>
-                                <li>Процент случайного начального состояния: {props.calculations?.calculations[index].percentLoad} %</li>
+                                <li>Файл режима: {props.calculations?.calculations[index]?.pathToRegim}</li>
+                                <li>Процент случайного утяжеления: {props.calculations?.calculations[index]?.percentForWorsening} %</li>
+                                <li>Процент случайного начального состояния: {props.calculations?.calculations[index]?.percentLoad} %</li>
                             </ul>                       
                     </div>
                     <div className={s.graphic}>
                         <Divider >Узлы для утяжеления</Divider>
-                        {props.calculations?.calculations[index].worseningSettings.map(a => a.nodeNumber).filter((v, i, a) => a.indexOf(v) === i).join(", ")}                      
+                        {props.calculations?.calculations[index]?.worseningSettings.map(a => a.nodeNumber).filter((v, i, a) => a.indexOf(v) === i).join(", ")}                      
                     </div>
                     </div>
             </div>

@@ -3,7 +3,8 @@ import  CalculationItem  from './CalculationItem';
 import { Tabs, List, Button, Input} from 'antd';
 import { DeleteOutlined, CloseOutlined  } from '@ant-design/icons';
 import s from './Calculations.module.css';
-import VirtualList from 'rc-virtual-list';
+import React, { useState } from 'react';
+import {useParams } from 'react-router-dom';
 
 const { Search } = Input;
 const { TabPane } = Tabs;
@@ -12,6 +13,10 @@ const CalculationsUID = (props) => {
         
     const calculationReady =[];
     const calculationProcess =[];
+
+    const params = useParams();
+    const calculationId = params.id;
+
     
     for (let i = 0; i<props.calculations?.calculations?.length; i++) {
         if (props.calculations.calculations[i].calculationEnd != null)  {
@@ -28,15 +33,15 @@ const CalculationsUID = (props) => {
     const deleteCalculationById = (id) => {
         props.deleteCalculationById(id);
        }
-
+       //className={((item.id == calculationId) ? s.calculationsItems : s.activeItemList)}
        const onSearch = (value) => console.log(value);
        const operations = <Search placeholder="Поиск" onSearch={onSearch} enterButton style={{width: '170px'}} />;
        
         return <div className={s.full}>
             <Tabs defaultActiveKey="1" tabBarExtraContent={operations}>
                 <TabPane tab={readyTabText} key="1">
-                    <List itemLayout="horizontal" dataSource={calculationReady} renderItem={(item) => (
-                        <List.Item className={s.calculationsItems} key={item.title} actions={[<DeleteOutlined style={{color: 'blue'}} onClick={() => deleteCalculationById(item.id)}>Удалить</DeleteOutlined>]}>
+                    <List loading = {props.spin} itemLayout="horizontal" dataSource={calculationReady} renderItem={(item) => (
+                        <List.Item className={((item.id == calculationId) ? s.activeItemList : s.calculationsItems)} actions={[<DeleteOutlined style={{color: 'blue'}} onClick={() => deleteCalculationById(item.id)}>Удалить</DeleteOutlined>]}>
                             <List.Item.Meta
                                 title={<CalculationItem calculations={item} deleteCalculationById={deleteCalculationById} />}
                                 description={item.calculationEnd}

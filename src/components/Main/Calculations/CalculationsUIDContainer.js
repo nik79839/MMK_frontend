@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { compose } from "redux";
 import { getCalculations, getCalculationResultInfoById, deleteCalculationById } from '../../../redux/main-reducer';
 import { connect } from 'react-redux';
@@ -11,9 +11,11 @@ const CalculationsUIDContainer = (props) => {
     
     const params = useParams();
     const calculationId = params.id;
+    const [spin, setSpin] = useState(true);
     
     useEffect(() => {
         props.getCalculations();
+        setSpin(false);
         if (calculationId)
         {
             props.getCalculationStatisticById(calculationId);
@@ -22,9 +24,8 @@ const CalculationsUIDContainer = (props) => {
 
         return <>   
             <div>
-                <CalculationsUID calculations={props.calculations} deleteCalculationById={props.deleteCalculationById}/>
+                <CalculationsUID calculations={props.calculations} deleteCalculationById={props.deleteCalculationById} spin = {spin}/>
             </div>
-            {(props.calculations.calculations[0]?.id == 'iyk') && (<Spin />)}
             </> 
 }
 
