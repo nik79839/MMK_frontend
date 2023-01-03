@@ -30,7 +30,7 @@ const columns = [
 
 const RastrFiles = (props) => { 
 
-    const onChange = (info) => {
+  const onChange = (info) => {
         if (info.file.status !== 'uploading') {
           console.log(info.file, info.fileList);
         }
