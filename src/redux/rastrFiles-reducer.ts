@@ -38,7 +38,6 @@ export const getRastrFiles = () => {
     return async (dispatch: any) => { 
         let response = await rastrFilesAPI.getRastrFiles();
         let data: initialStateType = response.data;
-        debugger;
         dispatch(setRastrFiles(data));
     }
 }

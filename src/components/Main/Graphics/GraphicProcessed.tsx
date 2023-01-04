@@ -1,8 +1,13 @@
-//import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label } from 'recharts';
+import { statisticBaseType } from '../../../types/types';
 
+type PropsType = {
+  calculationResultInfo: statisticBaseType
+  measure: string
+};
 
-const GraphicProcessed = (props) => { 
+const GraphicProcessed: React.FC<PropsType> = (props) => { 
         return <div >
           <div className="chart">
         <BarChart width={560} height={300} data={props.calculationResultInfo?.histogramData} margin={{ top: 5, right: 30, left: 20, bottom: 5,}}>

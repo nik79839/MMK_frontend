@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
-import { Menu, Space,SubMenu } from 'antd';
+import { Menu } from 'antd';
 import { MenuOutlined, UserOutlined, LogoutOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 
-const NavMenu = (props) => {
+const NavMenu: React.FC = () => {
 
   const logout = () => {
     localStorage.removeItem("token");
@@ -14,16 +14,16 @@ const NavMenu = (props) => {
   return <>
       <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['home']} style={{lineHeight: '57px'}} overflowedIndicator={<MenuOutlined />}>
         <Menu.Item key="home" > 
-          <NavLink tag={Link} className="tags" to="/" style={{ textDecoration: 'none' }}>Расчеты</NavLink>
+          <NavLink className="tags" to="/" style={{ textDecoration: 'none' }}>Расчеты</NavLink>
         </Menu.Item>
         <Menu.Item key="calculation" > 
-          <NavLink tag={Link} className="text-white" to="/counter" style={{ textDecoration: 'none' }}>Выполнить расчет</NavLink>
+          <NavLink className="text-white" to="/counter" style={{ textDecoration: 'none' }}>Выполнить расчет</NavLink>
         </Menu.Item>
         <Menu.Item key="files" > 
-          <NavLink tag={Link} className="text-white" to="/rastrFiles" style={{ textDecoration: 'none' }}>Режимы</NavLink>
+          <NavLink className="text-white" to="/rastrFiles" style={{ textDecoration: 'none' }}>Режимы</NavLink>
         </Menu.Item>
         <Menu.Item key="users" > 
-          <NavLink tag={Link} className="text-white" to="/users" style={{ textDecoration: 'none' }}>Пользователи</NavLink>
+          <NavLink className="text-white" to="/users" style={{ textDecoration: 'none' }}>Пользователи</NavLink>
         </Menu.Item>
         <Menu.Item key="help" > 
           <QuestionCircleOutlined />

@@ -3,8 +3,19 @@ import { compose } from "redux";
 import { getRastrFiles } from '../../redux/rastrFiles-reducer';
 import { connect } from 'react-redux';
 import  RastrFiles  from './RastrFiles';
+import { fileType } from "../../types/types";
+import { AppStateType } from "../../redux/redux-store";
 
-const RastrFilesContainer = (props) => { 
+type MapStatePropsType = {
+    rastrFiles: Array<fileType>
+}
+type MapDispatchpropsType = {
+    getRastrFiles: () => void
+}
+
+type PropsType = MapStatePropsType & MapDispatchpropsType;
+
+const RastrFilesContainer: React.FC<PropsType> = (props) => { 
     
     const [spin, setSpin] = useState(true);
     
@@ -20,12 +31,12 @@ const RastrFilesContainer = (props) => {
             </> 
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: AppStateType) => {
     return {
         rastrFiles: state.rastrFilesPage.rastrFiles
     }   
 }
 
 export default compose(
-    connect(mapStateToProps, {getRastrFiles}))
+    connect<MapStatePropsType, MapDispatchpropsType, AppStateType>(mapStateToProps, {getRastrFiles}))
     (RastrFilesContainer);

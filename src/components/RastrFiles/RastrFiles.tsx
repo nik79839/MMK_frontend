@@ -2,8 +2,10 @@ import { Table, Upload, Button, message, Popconfirm, Space } from 'antd';
 import { UploadOutlined, DownloadOutlined, DeleteOutlined } from '@ant-design/icons';
 import React from 'react';
 import s from './RastrFiles.module.css';
+import { ColumnsType } from 'antd/lib/table';
+import { fileType } from '../../types/types';
 
-const columns = [
+const columns: ColumnsType<fileType> = [
     {
       title: 'Название файла режима',
       dataIndex: 'name',
@@ -26,11 +28,17 @@ const columns = [
           </Popconfirm>
           </Space>
       ),
-    },]
+    },];
 
-const RastrFiles = (props) => { 
+type PropsType = {
+  rastrFiles: Array<fileType>
+  spin: boolean
+  getRastrFiles: () => void
+    };
 
-  const onChange = (info) => {
+const RastrFiles: React.FC<PropsType> = (props) => { 
+
+  const onChange = (info: any) => {
         if (info.file.status !== 'uploading') {
           console.log(info.file, info.fileList);
         }

@@ -25,7 +25,7 @@ const UsersContainer = React.memo((props) => {
 
 let mapStateToProps = (state) => {
     return {
-        users: state.auth.users
+        users: state.auth.users.users
     }   
 }
 

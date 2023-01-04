@@ -1,7 +1,14 @@
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label } from 'recharts';
+import React from 'react';
+import { LineChart, Line, XAxis, YAxis, Tooltip, Legend } from 'recharts';
+import { calculationResultBaseType } from '../../../types/types';
 
+type PropsType = {
+  calculationResultInfo: Array<calculationResultBaseType>
+  measure: string
+  name: string
+};
 
-const GraphicInit = (props) => { 
+const GraphicInit: React.FC<PropsType> = (props) => { 
         return <div >
           <div className="chart">
         <LineChart width={560} height={300} data={props.calculationResultInfo} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>

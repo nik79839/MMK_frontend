@@ -3,13 +3,15 @@ import { Button, Space, Table, Popconfirm } from 'antd';
 import UserCreateForm from './UserCreateForm';
 import { DeleteOutlined } from '@ant-design/icons';
 import s from './Users.module.css';
+import { ColumnsType } from 'antd/lib/table';
+import { usersType } from '../../types/types';
 
-const handleDelete = (key) => {
+const handleDelete = (key: string) => {
 //    const newData = dataSource.filter((item) => item.key !== key);
   //  setDataSource(newData);
   };
 
-const columns = [
+const columns: ColumnsType<usersType> = [
   {
     title: 'Полное имя',
     dataIndex: 'name',
@@ -38,16 +40,23 @@ const columns = [
     title: ' ',
     key: 'action',
     render: (_, record) => (
-        <Popconfirm title="Подвердите удаление" onConfirm={() => handleDelete(record.key)}>
+        <Popconfirm title="Подвердите удаление" onConfirm={() => handleDelete(record.login)}>
         <a>{<DeleteOutlined style={{color: 'blue'}}/>}</a>
         </Popconfirm>
     ),
   },
 ];
-const Users = (props) => {
+
+type PropsType = {
+  users: Array<usersType>
+  spin: boolean
+  createUser: (user: usersType) => void
+};
+
+const Users: React.FC<PropsType> = (props) => {
     const [open, setOpen] = useState(false);
 
-    const onCreate = (user) => {
+    const onCreate = (user: any) => {
       console.log('Received values of form: ', user);
       props.createUser(user);
       setOpen(false);
@@ -55,7 +64,7 @@ const Users = (props) => {
 
     return (
         <div className={s.table}>
-            <Table loading={props.spin}  columns={columns} dataSource={props.users.users} bordered title={() => 'Список пользователей'} />
+            <Table loading={props.spin}  columns={columns} dataSource={props.users} bordered title={() => 'Список пользователей'} />
             <Button style={{float: 'right'}} type="primary" onClick={() => {setOpen(true);}}>Добавить</Button>
             <UserCreateForm open={open} onCreate={onCreate} onCancel={() => {setOpen(false);}}/>
         </div>)}

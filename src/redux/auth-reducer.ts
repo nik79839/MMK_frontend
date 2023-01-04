@@ -1,22 +1,15 @@
 import { authAPI } from "../api/api";
+import { usersType, userType } from "../types/types";
 
 const SET_USER = 'SET_USER';
 const SET_USERS = 'SET_USERS';
 
-type userType = {
-    name: string
-    token: string
-}
-
-type usersType = {
-    name: string
-    login: string
-    post: string
-}
 
 let initialState = {
     user: {name: localStorage.getItem('user'), token: localStorage.getItem('token')} as userType,
-    users: [{name:'null', login: 'null',post: 'null'}] as Array<usersType>
+    users: {
+        userAmmount: 1,
+        users: [{name:'null', login: 'null', post: 'null'}] as Array<usersType>}
 };
 
 type initialStateType = typeof initialState;
@@ -31,7 +24,7 @@ const authReducer = (state = initialState, action: any): initialStateType => {
         case SET_USERS:
             return {                                     
                 ...state,
-                users: action.users
+                users: action.payload
             }
         default:                                     
             return state;
@@ -72,7 +65,8 @@ export const setUsers = (users: Array<usersType>): setUsersActionType => (
 export const getUsers = () => {
     return async (dispatch: any) => { 
         let response = await authAPI.getUsers();
-        dispatch(setUsers(response.data));      
+        let data: Array<usersType> = response.data;
+        dispatch(setUsers(data));      
     }
 }
 

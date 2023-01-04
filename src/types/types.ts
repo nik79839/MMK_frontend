@@ -42,3 +42,47 @@ export type fileType ={
     name: string
     lastModified: string
 }
+
+export type usersType = {
+    name: string
+    login: string
+    post: string
+}
+
+export type userType = {
+    name: string
+    token: string
+}
+
+type histogramDataType = {
+    interval: string
+    height: string
+};
+export type statisticBaseType = {
+    maximum: string
+    minimum: string
+    mean: string
+    stD: string
+    histogramData: Array<histogramDataType>
+};
+export type calculationResultBaseType = {
+    implementationId: number
+    value: number
+};
+interface powerFlowResultProcessedType extends statisticBaseType {  
+};
+interface voltageResultProcessedType extends statisticBaseType {
+    nodeNumber: string
+};
+interface currentResultProcessedType extends statisticBaseType {
+    brunchName: string
+};
+interface powerFlowResultType extends calculationResultBaseType {
+};
+interface voltageResultType extends calculationResultBaseType {
+    nodeNumber: number
+    nodeName: string
+};
+interface currentResultType extends calculationResultBaseType {
+    brunchName: string
+};
