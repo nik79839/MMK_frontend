@@ -1,17 +1,12 @@
 import { mainAPI } from "../api/api";
 import { withCallbacks} from 'redux-signalr';
+import { calculationType } from "../types/types";
 
 const SET_CALCULATIONS = 'SET_CALCULATIONS';
 const SET_CALCULATIONRESULTINFO = 'SET_CALCULATIONRESULTINFO';
 const UPDATE_PROGRESS = 'UPDATE_PROGRESS';
 
 
-type calculationType = {
-    id: string
-    name: string
-    calculationEnd: string
-    progress: number
-};
 type histogramDataType = {
     interval: string
     height: string

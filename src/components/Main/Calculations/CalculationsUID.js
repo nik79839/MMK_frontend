@@ -43,7 +43,7 @@ const CalculationsUID = (props) => {
                     <List loading = {props.spin} itemLayout="horizontal" dataSource={calculationReady} renderItem={(item) => (
                         <List.Item className={((item.id == calculationId) ? s.activeItemList : s.calculationsItems)} actions={[<DeleteOutlined style={{color: 'blue'}} onClick={() => deleteCalculationById(item.id)}>Удалить</DeleteOutlined>]}>
                             <List.Item.Meta
-                                title={<CalculationItem calculations={item} deleteCalculationById={deleteCalculationById} />}
+                                title={<CalculationItem calculations={item} />}
                                 description={item.calculationEnd}
                             />
                             <div className={s.sechName}>КС: {item.sechName}</div>
