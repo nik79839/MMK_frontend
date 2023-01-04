@@ -38,11 +38,11 @@ const GraphicsContainer = (props) => {
                     <StatisticCharacter characters = {props.calculationResultInfo?.powerFlowResultProcessed} measure = 'МВт'/>
                     <div className={s.graphics}>
                         <div className={s.graphic}>
-                            <GraphicProcessed calculationResultInfo={props.calculationResultInfo.powerFlowResultProcessed}
+                            <GraphicProcessed calculationResultInfo={props.calculationResultInfo?.powerFlowResultProcessed}
                                 measure = ' мВт'/> 
                         </div>
                         <div className={s.graphic}>
-                            <GraphicInit calculationResultInfo={props.calculationResultInfo.powerFlowResults} 
+                            <GraphicInit calculationResultInfo={props.calculationResultInfo?.powerFlowResults} 
                                 measure = ' МВт' name = 'Предельный переток'/>
                         </div>
                     </div> 
