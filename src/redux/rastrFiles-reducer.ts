@@ -1,11 +1,8 @@
 import { rastrFilesAPI } from "../api/api";
+import { fileType } from "../types/types";
 
 const SET_FILES= 'SET_FILES';
 
-type fileType ={
-    name: string
-    lastModified: string
-}
 
 type initialStateType = typeof initialState;
 

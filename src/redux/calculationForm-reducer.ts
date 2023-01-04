@@ -1,36 +1,20 @@
 import { calculationFormAPI } from "../api/api";
+import { rastrSchemeInfoType } from "../types/types";
 
 const SET_RASTRSCHEMEINFO = 'SET_RASTRSCHEMEINFO';
 
-type sechType = {
-    number: number 
-    name: string
-};
-type districtType = {
-    num: number
-    nameSech: string
-    brunches: any
-};
-type loadNodeType = {
-    name: string
-    number: number
-    district: districtType
-};
-
-let initialState = {
+let initialState: initialStateType = {
     rastrSchemeInfo : {
-        seches: [
-            { number: 1, name:'testDistrict' },
-        ] as Array<sechType>,
-        districts: [
-            { num: 1, nameSech:'testSech' , brunches: 'null' },
-        ] as Array<districtType>,
-        loadNodes : [
-            {name: 'null', number: 12, district: {nameSech: 'null', num: 1, brunches: 'null'}}
-        ] as Array<loadNodeType>
+        seches: [{ num: 1, sechName:'testDistrict', brunches: 'null' },],
+        districts: [{ number: 1, name:'testSech'  },],
+        loadNodes : [{name: 'null', number: 12, district: {name: 'null', number: 1}}],
+        nodes : [{name: 'null', number: 12, district: {name: 'null', number: 1}}],
+        brunches: [{startNode: 1, endNode: 2, parallelNumber: 1, name: 'test'}]
     }};
 
-type initialStateType = typeof initialState;
+type initialStateType = {
+    rastrSchemeInfo: rastrSchemeInfoType
+};
 
 const CalculationFormReducer = (state = initialState, action: any): initialStateType => { 
     switch (action.type) {

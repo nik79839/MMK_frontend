@@ -4,13 +4,26 @@ import { getRastrSchemeInfo, startCalculation} from '../../redux/calculationForm
 import { getRastrFiles } from '../../redux/rastrFiles-reducer';
 import { connect } from 'react-redux';
 import  CalculationFormNew  from './CalculationFormNew';
+import { fileType, rastrSchemeInfoType } from "../../types/types";
+import { AppStateType } from "../../redux/redux-store";
 
-const CalculationFormContainer = (props) => { 
-    useEffect(  () => {
+type MapStatePropsType = {
+    rastrSchemeInfo: rastrSchemeInfoType
+    rastrFiles: Array<fileType>
+}
+type MapDispatchpropsType = {
+    getRastrFiles: () => void
+    getRastrSchemeInfo: () => void
+    startCalculation: (values: any, token: any) => void
+}
+
+type PropsType = MapStatePropsType & MapDispatchpropsType;
+
+const CalculationFormContainer: React.FC<PropsType> = (props) => { 
+    useEffect(() => {
         props.getRastrFiles();
         props.getRastrSchemeInfo();
     },[])
-
 
         return <>   
             <div>
@@ -20,7 +33,7 @@ const CalculationFormContainer = (props) => {
             </> 
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: AppStateType) => {
     return {
         rastrSchemeInfo: state.calculationFormPage.rastrSchemeInfo,
         rastrFiles: state.rastrFilesPage.rastrFiles,
@@ -28,5 +41,5 @@ let mapStateToProps = (state) => {
 }
 
 export default compose(
-    connect(mapStateToProps, {getRastrSchemeInfo, startCalculation, getRastrFiles }))
+    connect<MapStatePropsType, MapDispatchpropsType, AppStateType>(mapStateToProps, {getRastrSchemeInfo, startCalculation, getRastrFiles }))
     (CalculationFormContainer);
