@@ -5,36 +5,42 @@ import { DeleteOutlined, CloseOutlined  } from '@ant-design/icons';
 import s from './Calculations.module.css';
 import React, { useState } from 'react';
 import {useParams } from 'react-router-dom';
+import { calculationType } from '../../../types/types';
 
 const { Search } = Input;
 const { TabPane } = Tabs;
 
-const CalculationsUID = (props) => { 
+type PropsType = {
+    calculations: Array<calculationType>
+    deleteCalculationById: (id: string) => void
+    spin: boolean
+};
+
+const CalculationsUID: React.FC<PropsType> = (props) => { 
         
-    const calculationReady =[];
-    const calculationProcess =[];
+    const calculationReady: Array<calculationType> =[];
+    const calculationProcess: Array<calculationType> =[];
 
     const params = useParams();
     const calculationId = params.id;
 
     
-    for (let i = 0; i<props.calculations?.calculations?.length; i++) {
-        if (props.calculations.calculations[i].calculationEnd != null)  {
-            calculationReady.push(props.calculations.calculations[i]);
+    for (let i = 0; i<props.calculations?.length; i++) {
+        if (props.calculations[i].calculationEnd != null)  {
+            calculationReady.push(props.calculations[i]);
         }
         else{
-            calculationProcess.push(props.calculations.calculations[i]);
+            calculationProcess.push(props.calculations[i]);
         }
     }
     var readyTabText = 'Завершенные расчеты (' + calculationReady.length.toString() + ')';
 
     var inProgressTabText = 'В процессе (' + calculationProcess.length.toString() + ')';
 
-    const deleteCalculationById = (id) => {
+    const deleteCalculationById = (id: string) => {
         props.deleteCalculationById(id);
        }
-       //className={((item.id == calculationId) ? s.calculationsItems : s.activeItemList)}
-       const onSearch = (value) => console.log(value);
+       const onSearch = (value: string) => console.log(value);
        const operations = <Search placeholder="Поиск" onSearch={onSearch} enterButton style={{width: '170px'}} />;
        
         return <div className={s.full}>
@@ -52,7 +58,7 @@ const CalculationsUID = (props) => {
                 </TabPane>
             <TabPane tab={inProgressTabText} key="2">
                 <List itemLayout="horizontal" dataSource={calculationProcess} renderItem={(item) => (
-                        <List.Item className={s.calculationsItems} key={item.title} actions={[<CloseOutlined  style={{color: 'red'}}>Удалить</CloseOutlined >]}>
+                        <List.Item className={s.calculationsItems} actions={[<CloseOutlined  style={{color: 'red'}}>Удалить</CloseOutlined >]}>
                             <List.Item.Meta title={<CalculationProgress calculations={item} />}/>
                         </List.Item>)} 
                     /> 

@@ -15,6 +15,9 @@ let reducers = combineReducers({
     auth: authReducer
 });
 
+type reducersType = typeof reducers;
+export type AppStateType = ReturnType<reducersType>;
+
 const connection = new HubConnectionBuilder()
   .configureLogging(LogLevel.Debug)
   .withUrl('https://localhost:5001/progress', {
@@ -28,9 +31,10 @@ const signal = signalMiddleware({
     connection,
   });
 
+  // @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleware,signal)));
-
+// @ts-ignore
 window.__store__ = store;
 
 export default store;

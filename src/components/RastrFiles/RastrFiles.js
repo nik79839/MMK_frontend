@@ -1,4 +1,4 @@
-import { Table, Row,Col, Upload, Button, message, Popconfirm, Space } from 'antd';
+import { Table, Upload, Button, message, Popconfirm, Space } from 'antd';
 import { UploadOutlined, DownloadOutlined, DeleteOutlined } from '@ant-design/icons';
 import React from 'react';
 import s from './RastrFiles.module.css';
