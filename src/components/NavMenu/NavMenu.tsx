@@ -3,8 +3,12 @@ import { Link } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { Menu } from 'antd';
 import { MenuOutlined, UserOutlined, LogoutOutlined, QuestionCircleOutlined } from '@ant-design/icons';
+import { AppStateType } from '../../redux/redux-store';
+import { useSelector } from 'react-redux';
 
 const NavMenu: React.FC = () => {
+
+  const user = useSelector((state: AppStateType) => state.auth.user);
 
   const logout = () => {
     localStorage.removeItem("token");

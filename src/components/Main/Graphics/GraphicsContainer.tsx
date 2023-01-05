@@ -1,6 +1,5 @@
 import React from "react";
-import { compose } from "redux";
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import GraphicProcessed from "./GraphicProcessed";
 import GraphicInit from "./GraphicInit";
 import GraphicVoltage from "./GraphicVoltage";
@@ -10,90 +9,69 @@ import {useParams } from 'react-router-dom';
 import StatisticCharacter from "./StatisticCharacter";
 import { Divider } from 'antd';
 import GraphicCurrent from "./GraphicCurrent";
-import { calculationResultInfoType, calculationType } from "../../../types/types";
 import { AppStateType } from "../../../redux/redux-store";
-
 const { TabPane } = Tabs;
 
-type MapStatePropsType = {
-    calculationResultInfo: calculationResultInfoType
-    calculations: Array<calculationType>
-}
-type MapDispatchpropsType = {
-}
+export const GraphicsContainer: React.FC = () => { 
 
-type PropsType = MapStatePropsType & MapDispatchpropsType;
-
-const GraphicsContainer: React.FC<PropsType> = (props) => { 
-
+    const calculations = useSelector((state: AppStateType) => state.mainPage.calculations.calculations);
+    const calcResultInfo = useSelector((state: AppStateType) => state.mainPage.calculationResultInfo);
+    
     const params = useParams();
     const calculationId = params.id;
-    let index = props.calculations?.findIndex(item => item.id == calculationId);
+    let index = calculations?.findIndex(item => item.id == calculationId);
 
     let isExistCurrent = false;
-    if (props?.calculationResultInfo?.currentResultProcessed.length == 0) {
+    if (calcResultInfo?.currentResultProcessed.length == 0) {
         isExistCurrent = true;
     }
 
     let isExistVoltage = false;
-    if (props?.calculationResultInfo?.voltageResultProcessed.length == 0) {
+    if (calcResultInfo?.voltageResultProcessed.length == 0) {
         isExistVoltage = true;
     }
 
         return  <div className={s.full}>
-            <Divider >Результаты расчета "{props.calculations?.[index]?.name}" </Divider>                  
+            <Divider >Результаты расчета "{calculations?.[index]?.name}" </Divider>                  
             <Tabs defaultActiveKey="1" >
                 <TabPane tab="Активная мощность" key="1">
-                    <StatisticCharacter characters = {props.calculationResultInfo?.powerFlowResultProcessed} measure = 'МВт'/>
+                    <StatisticCharacter characters = {calcResultInfo?.powerFlowResultProcessed} measure = 'МВт'/>
                     <div className={s.graphics}>
                         <div className={s.graphic}>
-                            <GraphicProcessed calculationResultInfo={props.calculationResultInfo?.powerFlowResultProcessed}
-                                measure = ' мВт'/> 
+                            <GraphicProcessed calculationResultInfo={calcResultInfo?.powerFlowResultProcessed} measure = ' мВт'/> 
                         </div>
                         <div className={s.graphic}>
-                            <GraphicInit calculationResultInfo={props.calculationResultInfo?.powerFlowResults} 
-                                measure = ' МВт' name = 'Предельный переток'/>
+                            <GraphicInit calculationResultInfo={calcResultInfo?.powerFlowResults} measure = ' МВт' name = 'Предельный переток'/>
                         </div>
                     </div> 
                 </TabPane>
                 <TabPane tab="Напряжение" key="2" disabled = {isExistVoltage}>
                     <div>
-                        <GraphicVoltage calculationResultInfo={props.calculationResultInfo}/>
+                        <GraphicVoltage calculationResultInfo={calcResultInfo}/>
                     </div> 
                 </TabPane>
                 <TabPane tab="Ток" key="3" disabled = {isExistCurrent}>
-                    <GraphicCurrent calculationResultInfo={props.calculationResultInfo}/>
+                    <GraphicCurrent calculationResultInfo={calcResultInfo}/>
                 </TabPane>
             </Tabs>
             <div className = {s.parameters}>
                     <div className={s.graphic}>
                     <Divider >Описание расчета</Divider>
-                        <label>{props.calculations[index]?.description}</label>                     
+                        <label>{calculations[index]?.description}</label>                     
                     </div>
                     <div className={s.graphic}>
                     <Divider >Параметры расчета</Divider>
                             <ul>
-                                <li>Количество реализаций: {props.calculationResultInfo?.powerFlowResults.length}</li>
-                                <li>Файл режима: {props.calculations[index]?.pathToRegim}</li>
-                                <li>Процент случайного утяжеления: {props.calculations[index]?.percentForWorsening} %</li>
-                                <li>Процент случайного начального состояния: {props.calculations[index]?.percentLoad} %</li>
+                                <li>Количество реализаций: {calcResultInfo?.powerFlowResults.length}</li>
+                                <li>Файл режима: {calculations[index]?.pathToRegim}</li>
+                                <li>Процент случайного утяжеления: {calculations[index]?.percentForWorsening} %</li>
+                                <li>Процент случайного начального состояния: {calculations[index]?.percentLoad} %</li>
                             </ul>                       
                     </div>
                     <div className={s.graphic}>
                         <Divider >Узлы для утяжеления</Divider>
-                        {props.calculations[index]?.worseningSettings.map(a => a.nodeNumber).filter((v, i, a) => a.indexOf(v) === i).join(", ")}                      
+                        {calculations[index]?.worseningSettings.map(a => a.nodeNumber).filter((v, i, a) => a.indexOf(v) === i).join(", ")}                      
                     </div>
                     </div>
             </div>
 }
-
-let mapStateToProps = (state: AppStateType): MapStatePropsType => {
-    return {
-        calculationResultInfo: state.mainPage.calculationResultInfo,
-        calculations: state.mainPage.calculations.calculations
-    }   
-}
-
-export default compose(
-    connect(mapStateToProps))
-    (GraphicsContainer);

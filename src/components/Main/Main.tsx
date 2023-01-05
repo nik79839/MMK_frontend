@@ -1,8 +1,8 @@
-import CalculationsUIDContainer from "./Calculations/CalculationsUIDContainer";
-import GraphicsContainer from "./Graphics/GraphicsContainer";
+import {GraphicsContainer} from "./Graphics/GraphicsContainer";
 import './Main.css';
 import {useParams } from 'react-router-dom';
 import React from "react";
+import { CalculationsUIDContainer } from "./Calculations/CalculationsUIDContainer";
 
 
 const Main: React.FC = () => { 

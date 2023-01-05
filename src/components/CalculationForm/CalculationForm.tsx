@@ -4,22 +4,32 @@ import { Form, Input,Button,InputNumber, Select, Row, Card, Space, message } fro
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import {useNavigate} from "react-router-dom"
 import { fileType, rastrSchemeInfoType } from '../../types/types';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppStateType } from '../../redux/redux-store';
+import { Dispatch } from 'redux';
+import { getRastrSchemeInfo, startCalculation } from '../../redux/calculationForm-reducer';
+import { getRastrFiles } from '../../redux/rastrFiles-reducer';
 const { TextArea } = Input;
 
-type PropsType = {
-  rastrSchemeInfo: rastrSchemeInfoType
-  rastrFiles: Array<fileType>
-  startCalculation: (values: any, token: any) => void
-};
 
-const CalculationFormNew: React.FC<PropsType> = (props) => {   
+export const CalculationForm: React.FC = () => { 
+  
+  const rastrFiles = useSelector((state: AppStateType) => state.rastrFilesPage.rastrFiles);
+  const rastrSchemeInfo = useSelector((state: AppStateType) => state.calculationFormPage.rastrSchemeInfo);
+  const dispatch: Dispatch<any> = useDispatch();
+
+  useEffect(() => {
+    dispatch(getRastrFiles());
+    dispatch(getRastrSchemeInfo());
+},[])
+  
   const source = axios.CancelToken.source();
   window.addEventListener("beforeunload", (ev) => 
-{  
-    ev.preventDefault();
-    return ev.returnValue = 'Are you sure you want to close?';
-});
+    {  
+      ev.preventDefault();
+      return ev.returnValue = 'Are you sure you want to close?';
+    });
 
 let navigate = useNavigate();
 
@@ -30,7 +40,7 @@ let navigate = useNavigate();
 
   const onFinish = (values: any) => {
     console.log('Success:', values);
-    props.startCalculation(values, source.token);
+    dispatch(startCalculation(values, source.token));
     message.loading('Расчет начат');
     navigate("/");
   };
@@ -53,7 +63,7 @@ let navigate = useNavigate();
       <Form.Item label="Файл режима" name="rastrFile" rules={[{
             required: true, message: 'Выберите файл режима!',},]}>
         <Select>
-        {props.rastrFiles?.map((rastrFile) => (
+        {rastrFiles?.map((rastrFile) => (
           <Select.Option value={rastrFile.name}>{rastrFile.name} </Select.Option>
         ))}
         </Select>
@@ -73,22 +83,22 @@ let navigate = useNavigate();
       <Form.Item label="Контролируемое сечение" name="sechNumber" rules={[{
             required: true, message: 'Выберите сечение!',},]}>
         <Select>
-          {props.rastrSchemeInfo.seches?.map((sech) => (
+          {rastrSchemeInfo.seches?.map((sech) => (
           <Select.Option value={sech.num}>{sech.sechName} </Select.Option>))}
         </Select>
       </Form.Item>
 
       <Form.Item label="Узлы для контроля напряжения" name='uNodes' >
                   <Select style={{width: 500,}} showSearch mode='multiple' >
-                  {props.rastrSchemeInfo.districts?.map((district) => (
+                  {rastrSchemeInfo.districts?.map((district) => (
                     <Select.OptGroup label={district.name}>
-                    {props.rastrSchemeInfo.nodes?.map((node) => {
+                    {rastrSchemeInfo.nodes?.map((node) => {
                       if (node.district.name == district.name) return ( 
                         <Select.Option value={node.number} >{node.name} </Select.Option>)})}
                     </Select.OptGroup>))}
 
                     <Select.OptGroup label='Узлы без названия района'>
-                    {props.rastrSchemeInfo.nodes?.map((node) => {
+                    {rastrSchemeInfo.nodes?.map((node) => {
                       if (node.district.name == '') return ( 
                         <Select.Option value={node.number}>{node.name}</Select.Option>)})}
                     </Select.OptGroup>   
@@ -97,7 +107,7 @@ let navigate = useNavigate();
 
       <Form.Item label="Ветви для контроля тока" name='iBrunches' >
                   <Select style={{width: 500,}} showSearch mode='multiple' >
-                    {props.rastrSchemeInfo.brunches?.map((brunch) => {
+                    {rastrSchemeInfo.brunches?.map((brunch) => {
                       return ( 
                         <Select.Option value={brunch.name}>{brunch.name} </Select.Option>)})}
                   </Select>
@@ -118,15 +128,15 @@ let navigate = useNavigate();
                 <Form.Item label="Узел" {...restField} name={[name, 'nodeNumber']} style={{width: 450,}} rules={[{
                       required: true, message: 'Missing first name',},]}>
                   <Select style={{width: 290,}} showSearch >
-                  {props.rastrSchemeInfo.districts?.map((district) => (
+                  {rastrSchemeInfo.districts?.map((district) => (
                     <Select.OptGroup label={district.name}>
-                    {props.rastrSchemeInfo.loadNodes?.map((loadNode) => {
+                    {rastrSchemeInfo.loadNodes?.map((loadNode) => {
                       if (loadNode.district.name == district.name) return ( 
                         <Select.Option value={loadNode.number}>{loadNode.name} </Select.Option>)})}
                     </Select.OptGroup>))}
 
                     <Select.OptGroup label='Узлы без названия района'>
-                    {props.rastrSchemeInfo.loadNodes?.map((loadNode) => {
+                    {rastrSchemeInfo.loadNodes?.map((loadNode) => {
                       if (loadNode.district.name == '') return ( 
                         <Select.Option value={loadNode.number}>{loadNode.name} </Select.Option>)})}
                     </Select.OptGroup>   
@@ -156,4 +166,3 @@ let navigate = useNavigate();
       <button onClick={abortZ}/>
         </div> 
 }
-export default CalculationFormNew;

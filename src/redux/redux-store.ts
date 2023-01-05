@@ -1,5 +1,5 @@
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
-import thunkMiddleware from "redux-thunk";
+import thunkMiddleware, {ThunkDispatch} from "redux-thunk";
 import mainReducer from "./main-reducer";
 import CalculationFormReducer from './calculationForm-reducer';
 import RastrFilesReducer from './rastrFiles-reducer'
@@ -18,8 +18,9 @@ let reducers = combineReducers({
 type reducersType = typeof reducers;
 export type AppStateType = ReturnType<reducersType>;
 
-type properiesType<T> = T extends{[key: string]: infer U} ? U: never;
-export type InferActionsType<T extends {[key: string ]: (...args: any[]) => any}> = ReturnType<properiesType<T>>;
+export type InferActionsType<T> =T extends {[keys: string ]: (...args: any[]) => infer U} ? U: never;
+
+
 
 const connection = new HubConnectionBuilder()
   .configureLogging(LogLevel.Debug)
@@ -39,5 +40,6 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleware,signal)));
 // @ts-ignore
 window.__store__ = store;
+
 
 export default store;

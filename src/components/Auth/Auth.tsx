@@ -3,17 +3,20 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {useNavigate} from "react-router-dom"
 import './Auth.css';
 import React from 'react';
+import { Dispatch } from 'redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUser } from '../../redux/auth-reducer';
+import { AppStateType } from '../../redux/redux-store';
 
-type PropsType = {
-  getUser: (values: any) => void
-};
 
-const Auth: React.FC<PropsType> = (props) => {
+export const Auth: React.FC = () => {
 
+  const user = useSelector((state: AppStateType) => state.auth.user);
+  const dispatch: Dispatch<any> = useDispatch();
   let navigate = useNavigate();
   const onFinish = async (values: any) => {
       try { 
-        await props.getUser(values);
+        await dispatch(getUser(values));
         message.success('Успешный вход');
         navigate("/");}
       catch {
@@ -42,6 +45,6 @@ const Auth: React.FC<PropsType> = (props) => {
         </Form>
         </Card>
         </Row>
-        </div>);
+        </div>)
 }
 export default Auth;
