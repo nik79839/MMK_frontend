@@ -1,3 +1,7 @@
+type worseningSettingsType = {
+    nodeNumber: number
+    maxValue: number
+}
 export type calculationType = {
     id: string
     name: string
@@ -8,7 +12,9 @@ export type calculationType = {
     percentLoad: number
     percentForWorsening: number
     description?: string
+    worseningSettings: Array<worseningSettingsType>
 };
+
 
 type sechType = {
     num: number
@@ -72,7 +78,7 @@ export type calculationResultBaseType = {
 interface powerFlowResultProcessedType extends statisticBaseType {  
 };
 interface voltageResultProcessedType extends statisticBaseType {
-    nodeNumber: string
+    nodeName: string
 };
 interface currentResultProcessedType extends statisticBaseType {
     brunchName: string
@@ -86,3 +92,12 @@ interface voltageResultType extends calculationResultBaseType {
 interface currentResultType extends calculationResultBaseType {
     brunchName: string
 };
+export type calculationResultInfoType = {
+    powerFlowResultProcessed: powerFlowResultProcessedType,
+            voltageResultProcessed: Array<voltageResultProcessedType>,
+            currentResultProcessed: Array<currentResultProcessedType>,
+            powerFlowResults: Array<powerFlowResultType>,
+            voltageResults: Array<voltageResultType>,
+            currentResults: Array<currentResultType>,
+            worseningSettings: Array<number>
+}

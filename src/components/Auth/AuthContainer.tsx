@@ -5,12 +5,23 @@ import { getUser } from '../../redux/auth-reducer';
 import { connect } from 'react-redux';
 import  Auth  from './Auth';
 import {useNavigate} from "react-router-dom"
+import { AppStateType } from "../../redux/redux-store";
+import { userType } from "../../types/types";
 
-const AuthContainer = React.memo((props) => {
+type MapStatePropsType = {
+    user: userType
+}
+type MapDispatchpropsType = {
+    getUser: (values: any) => void
+}
+
+type PropsType = MapStatePropsType & MapDispatchpropsType;
+
+const AuthContainer: React.FC<PropsType> = React.memo((props) => {
 
     let navigate = useNavigate();
 
-    if (!props.auth) { {
+    if (props.user.name != 'null') { {
     return(  
         <div>
             <Auth getUser={props.getUser}/>
@@ -21,9 +32,9 @@ const AuthContainer = React.memo((props) => {
     }
 })
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
-        auth: state.auth.isAuth
+        user: state.auth.user
     }   
 }
 

@@ -5,16 +5,21 @@ import StatisticCharacter from './StatisticCharacter';
 import GraphicProcessed from './GraphicProcessed';
 import GraphicInit from './GraphicInit';
 import s from './Graphics.module.css';
+import { calculationResultInfoType } from '../../../types/types';
 
 const { Option } = Select;
 
-const GraphicCurrent = (props) => { 
+type PropsType = {
+  calculationResultInfo: calculationResultInfoType
+};
+
+const GraphicCurrent: React.FC<PropsType> = (props) => { 
 
   const [current, setCurrent] = useState(props?.calculationResultInfo.currentResultProcessed[0])
   const [currentInit, setCurrentInit] = useState(props?.calculationResultInfo.currentResults.
     filter(item => item.brunchName == current.brunchName))
     
-  const handleVoltageChange = (value) => {   
+  const handleVoltageChange = (value: string) => {   
     for (let i=0; i<props?.calculationResultInfo.currentResultProcessed.length; i++) {
       if (props?.calculationResultInfo.currentResultProcessed[i].brunchName == value) {
         setCurrent(props?.calculationResultInfo.currentResultProcessed[i]);

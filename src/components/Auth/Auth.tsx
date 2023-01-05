@@ -1,14 +1,17 @@
 import { Button, Form, Input,Row, Card, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { getUser } from '../../redux/auth-reducer';
 import {useNavigate} from "react-router-dom"
 import './Auth.css';
+import React from 'react';
 
+type PropsType = {
+  getUser: (values: any) => void
+};
 
-const Auth = (props) => {
+const Auth: React.FC<PropsType> = (props) => {
 
   let navigate = useNavigate();
-  const onFinish = async (values) => {
+  const onFinish = async (values: any) => {
       try { 
         await props.getUser(values);
         message.success('Успешный вход');
@@ -18,8 +21,8 @@ const Auth = (props) => {
       } 
       };
 
-    return (
-        <Row type="flex" justify='center' align= 'middle' style={{minHeight: '70vh'}}>
+    return (<div>
+        <Row justify='center' align= 'middle' style={{minHeight: '70vh'}}>
           <Card className='card' >
         <Form name="basic"  initialValues={{remember: true,}} 
             autoComplete="on" onFinish={onFinish} className="login-form">
@@ -39,6 +42,6 @@ const Auth = (props) => {
         </Form>
         </Card>
         </Row>
-      );
+        </div>);
 }
 export default Auth;

@@ -2,10 +2,10 @@ import CalculationsUIDContainer from "./Calculations/CalculationsUIDContainer";
 import GraphicsContainer from "./Graphics/GraphicsContainer";
 import './Main.css';
 import {useParams } from 'react-router-dom';
-import { Divider } from 'antd';
+import React from "react";
 
 
-const Main = (props) => { 
+const Main = () => { 
 
     const params = useParams();
     const calculationId = params.id;
@@ -13,7 +13,7 @@ const Main = (props) => {
         return <div className="main">
             <div className="calculations">
                 <div>
-                    <CalculationsUIDContainer />
+                    <CalculationsUIDContainer/>
                 </div>
                 {calculationId != null ? (
                 <div className="graphics">

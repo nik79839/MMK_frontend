@@ -1,45 +1,10 @@
 import { mainAPI } from "../api/api";
 import { withCallbacks} from 'redux-signalr';
-import { calculationType } from "../types/types";
+import { calculationResultInfoType, calculationType } from "../types/types";
 
 const SET_CALCULATIONS = 'SET_CALCULATIONS';
 const SET_CALCULATIONRESULTINFO = 'SET_CALCULATIONRESULTINFO';
 const UPDATE_PROGRESS = 'UPDATE_PROGRESS';
-
-
-type histogramDataType = {
-    interval: string
-    height: string
-};
-type statisticBaseType = {
-    maximum: string
-    minimum: string
-    mean: string
-    stD: string
-    histogramData: Array<histogramDataType>
-};
-type calculationResultBaseType = {
-    implementationId: number
-    value: number
-};
-interface powerFlowResultProcessedType extends statisticBaseType {  
-};
-interface voltageResultProcessedType extends statisticBaseType {
-    nodeNumber: string
-};
-interface currentResultProcessedType extends statisticBaseType {
-    brunchName: string
-};
-interface powerFlowResultType extends calculationResultBaseType {
-};
-interface voltageResultType extends calculationResultBaseType {
-    nodeNumber: number
-    nodeName: string
-};
-interface currentResultType extends calculationResultBaseType {
-    brunchName: string
-};
-
 
 let initialState = {
     calculations: {
@@ -49,17 +14,17 @@ let initialState = {
     ] as Array<calculationType>},
 
     calculationResultInfo: {
-            powerFlowResultProcessed: {maximum: '20',minimum: '13', mean: '18', stD: '9', histogramData: [{interval: '1-2', height: '0,012'}]} as powerFlowResultProcessedType,
-            voltageResultProcessed: [{nodeNumber: 'testNum', histogramData: [{interval: '1-2', height: '0,012'}]},
-                {nodeNumber: 'testNum2', histogramData: [{interval: '1-2', height: '0,012'}]}]  as Array<voltageResultProcessedType>,
+            powerFlowResultProcessed: {maximum: '20',minimum: '13', mean: '18', stD: '9', histogramData: [{interval: '1-2', height: '0,012'}]},
+            voltageResultProcessed: [{nodeName: 'testNum', histogramData: [{interval: '1-2', height: '0,012'}]},
+                {nodeNumber: 'testNum2', histogramData: [{interval: '1-2', height: '0,012'}]}] ,
             currentResultProcessed: [{brunchName : 'testNum', histogramData: [{interval: '1-2', height: '0,012'}]},
-                {nodeNumber: 'testNum2', histogramData: [{interval: '1-2', height: '0,012'}]}]  as Array<currentResultProcessedType>,
+                {nodeNumber: 'testNum2', histogramData: [{interval: '1-2', height: '0,012'}]}],
 
-            powerFlowResults: [{value: 868, implementationId: 1}] as Array<powerFlowResultType>,
-            voltageResults: [{nodeNumber: 2643,nodeName : "Север", value: 176, implementationId: 1}] as Array<voltageResultType>,
-            currentResults: [{brunchName : "Север-asgag", value: 176, implementationId: 1}] as Array<currentResultType>,
-            worseningSettings: [1654, 2653] as Array<number>
-}};
+            powerFlowResults: [{value: 868, implementationId: 1}],
+            voltageResults: [{nodeNumber: 2643,nodeName : "Север", value: 176, implementationId: 1}],
+            currentResults: [{brunchName : "Север-asgag", value: 176, implementationId: 1}],
+            worseningSettings: [1654, 2653]
+} as calculationResultInfoType};
 type initialStateType = typeof initialState;
 
 const mainReducer = (state = initialState, action: any): initialStateType => { 
