@@ -1,6 +1,8 @@
 import { mainAPI } from "../api/api";
 import { withCallbacks} from 'redux-signalr';
 import { calculationResultInfoType, calculationType } from "../types/types";
+import { ThunkAction } from "redux-thunk";
+import { AppStateType, InferActionsType } from "./redux-store";
 
 const SET_CALCULATIONS = 'SET_CALCULATIONS';
 const SET_CALCULATIONRESULTINFO = 'SET_CALCULATIONRESULTINFO';
@@ -56,54 +58,40 @@ const mainReducer = (state = initialState, action: any): initialStateType => {
     }
 }
 
-type setCalculationsActionType = {
-    type: typeof SET_CALCULATIONS
-    payload: calculationType
+const actions = {
+    setCalculations: (calculations: calculationType) => ({type: SET_CALCULATIONS,  payload: calculations}),
+    setCalculationResultInfo: (calculationResultInfo: typeof initialState.calculationResultInfo) => (
+        { type: SET_CALCULATIONRESULTINFO,  payload: calculationResultInfo  }),
+    updateProgress: (progress: number, id: number) => ({ type: UPDATE_PROGRESS,  payload: {progress, id}})
 }
-export const setCalculations = (calculations: calculationType): setCalculationsActionType => (
-    { type: SET_CALCULATIONS,  payload: calculations  }
-)
-export const getCalculations = () => {
-    return async (dispatch: any) => { 
+type ActionTypes = InferActionsType<typeof actions>;
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes>;
+
+export const getCalculations = (): ThunkType => {
+    return async (dispatch) => { 
         let response = await mainAPI.getCalculations();
-        dispatch(setCalculations(response.data));      
+        dispatch(actions.setCalculations(response.data));      
     }
 }
 
-type setCalculationResultInfoActionType = {
-    type: typeof SET_CALCULATIONRESULTINFO
-    payload: typeof initialState.calculationResultInfo
-}
-export const setCalculationResultInfo = (calculationResultInfo: typeof initialState.calculationResultInfo): setCalculationResultInfoActionType => (
-    { type: SET_CALCULATIONRESULTINFO,  payload: calculationResultInfo  }
-)
-export const getCalculationResultInfoById = (id: any) => {
-    return async (dispatch: any) => { 
+export const getCalculationResultInfoById = (id: any): ThunkType => {
+    return async (dispatch) => { 
         let response = await mainAPI.getCalculationStatisticById(id);
-        dispatch(setCalculationResultInfo(response.data));      
+        dispatch(actions.setCalculationResultInfo(response.data));      
     }
 }
 
-export const deleteCalculationById = (id: any) => {
-    return async (dispatch: any) => { 
+export const deleteCalculationById = (id: any): ThunkType => {
+    return async (dispatch) => { 
         let response = await mainAPI.deleteCalculationById(id);
-        dispatch(setCalculations(response.data));       
+        dispatch(actions.setCalculations(response.data));       
     }
 }
-
-type updateProgressActionType = {
-    type: typeof UPDATE_PROGRESS
-    payload: {progress: number 
-        id: number}
-}
-export const updateProgress = (progress: number, id: number): updateProgressActionType => (
-    { type: UPDATE_PROGRESS,  payload: {progress, id}  }
-)
  
 export const callbacks = withCallbacks()
     .add('SendProgress', (msg, id) => (dispatch) => {
         console.log(msg);
-    dispatch (updateProgress(msg, id));
+    dispatch (actions.updateProgress(msg, id));
     if (msg === 100) {
         alert("Расчет завершен");
     }  

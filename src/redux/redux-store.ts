@@ -18,6 +18,9 @@ let reducers = combineReducers({
 type reducersType = typeof reducers;
 export type AppStateType = ReturnType<reducersType>;
 
+type properiesType<T> = T extends{[key: string]: infer U} ? U: never;
+export type InferActionsType<T extends {[key: string ]: (...args: any[]) => any}> = ReturnType<properiesType<T>>;
+
 const connection = new HubConnectionBuilder()
   .configureLogging(LogLevel.Debug)
   .withUrl('https://localhost:5001/progress', {

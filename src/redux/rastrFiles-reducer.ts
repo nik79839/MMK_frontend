@@ -1,5 +1,7 @@
+import { ThunkAction } from "redux-thunk";
 import { rastrFilesAPI } from "../api/api";
 import { fileType } from "../types/types";
+import { AppStateType, InferActionsType } from "./redux-store";
 
 const SET_FILES= 'SET_FILES';
 
@@ -26,26 +28,25 @@ const RastrFilesReducer = (state = initialState, action: any): initialStateType 
     }
 }
 
-type setRastrFilesActionType = {
-    type: typeof SET_FILES
-    payload: initialStateType
+const actions = {
+    setRastrFiles: (rastrFiles: initialStateType) => ({type: SET_FILES,  payload: rastrFiles})
 }
 
-export const setRastrFiles = (rastrFiles: initialStateType): setRastrFilesActionType => (
-    { type: SET_FILES,  payload: rastrFiles  }
-)
-export const getRastrFiles = () => {
-    return async (dispatch: any) => { 
+type ActionTypes = InferActionsType<typeof actions>;
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes>;
+
+export const getRastrFiles = (): ThunkType => {
+    return async (dispatch) => { 
         let response = await rastrFilesAPI.getRastrFiles();
         let data: initialStateType = response.data;
-        dispatch(setRastrFiles(data));
+        dispatch(actions.setRastrFiles(data));
     }
 }
-export const postRastrFiles = (file: any) => {
-    return async (dispatch: any) => { 
+export const postRastrFiles = (file: any): ThunkType => {
+    return async (dispatch) => { 
         let response = await rastrFilesAPI.postRastrFiles(file);
         if (response.status === 200) {     
-        dispatch(setRastrFiles(response.data));}      
+        dispatch(actions.setRastrFiles(response.data));}      
     }
 }
  

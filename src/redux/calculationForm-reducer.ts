@@ -1,5 +1,7 @@
+import { ThunkAction } from "redux-thunk";
 import { calculationFormAPI } from "../api/api";
 import { rastrSchemeInfoType } from "../types/types";
+import { AppStateType, InferActionsType } from "./redux-store";
 
 const SET_RASTRSCHEMEINFO = 'SET_RASTRSCHEMEINFO';
 
@@ -28,18 +30,17 @@ const CalculationFormReducer = (state = initialState, action: any): initialState
     }
 }
 
-type setRastrSchemeInfoActionType = {
-    type: typeof SET_RASTRSCHEMEINFO
-    payload: initialStateType
-}
+const actions = {
+    setRastrSchemeInfo: (rastrSchemeInfo: initialStateType) => ({type: SET_RASTRSCHEMEINFO, payload: rastrSchemeInfo})
+};
 
-export const setRastrSchemeInfo = (rastrSchemeInfo: initialStateType): setRastrSchemeInfoActionType => (
-    { type: SET_RASTRSCHEMEINFO,  payload: rastrSchemeInfo  }
-)
-export const getRastrSchemeInfo = () => {
-    return async (dispatch: any) => { 
+type ActionTypes = InferActionsType<typeof actions>;
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes>;
+
+export const getRastrSchemeInfo = (): ThunkType => {
+    return async (dispatch) => { 
         let response = await calculationFormAPI.getRastrSchemeInfo();      
-        dispatch(setRastrSchemeInfo(response.data));      
+        dispatch(actions.setRastrSchemeInfo(response.data));      
     }
 }
 

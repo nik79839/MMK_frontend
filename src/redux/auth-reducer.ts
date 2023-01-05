@@ -1,9 +1,10 @@
+import { ThunkAction } from "redux-thunk";
 import { authAPI } from "../api/api";
 import { usersType, userType } from "../types/types";
+import { AppStateType, InferActionsType } from "./redux-store";
 
 const SET_USER = 'SET_USER';
 const SET_USERS = 'SET_USERS';
-
 
 let initialState = {
     user: {name: localStorage.getItem('user'), token: localStorage.getItem('token')} as userType,
@@ -31,22 +32,21 @@ const authReducer = (state = initialState, action: any): initialStateType => {
     }
 }
 
-type setUserActionType = {
-    type: typeof SET_USER
-    payload: userType
-}
+const actions = {
+    setUser: (user: userType) => ({ type: SET_USER,  payload: user}),
+    setUsers: (users: Array<usersType>) => ({type: SET_USERS,  payload: users})
+};
 
-export const setUser = (user: userType): setUserActionType => (
-    { type: SET_USER,  payload: user  }
-)
+type ActionTypes = InferActionsType<typeof actions>;
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes>;
 
-export const getUser = (values: any) => {
-    return async (dispatch: any) => { 
+export const getUser = (values: any): ThunkType => {
+    return async (dispatch) => { 
         let response = await authAPI.auth(values);
         if (response.status == 200 && response.data != null) {
             localStorage.setItem("token", response.data.token);
             localStorage.setItem("user", response.data.name);
-            dispatch(setUser(response.data));
+            dispatch(actions.setUser(response.data));
         }
         if (response.status == 400) {
             throw "Указаны неверные имя пользователя или пароль"
@@ -54,19 +54,11 @@ export const getUser = (values: any) => {
     }
 }
 
-type setUsersActionType = {
-    type: typeof SET_USERS
-    payload: Array<usersType>
-}
-
-export const setUsers = (users: Array<usersType>): setUsersActionType => (
-    { type: SET_USERS,  payload: users}
-)
-export const getUsers = () => {
-    return async (dispatch: any) => { 
+export const getUsers = (): ThunkType => {
+    return async (dispatch) => { 
         let response = await authAPI.getUsers();
         let data: Array<usersType> = response.data;
-        dispatch(setUsers(data));      
+        dispatch(actions.setUsers(data));      
     }
 }
 
@@ -74,15 +66,6 @@ export const createUser = (user: any) => {
     return async (dispatch: any) => { 
         await authAPI.createUser(user);
         getUsers();     
-    }
-}
-
-export const whoAmI = () => {
-    return async (dispatch: any) => { 
-        let response = await authAPI.whoAmI();
-        if (response.status == 200) {
-            dispatch(setUser(response.data));
-        }           
     }
 }
 
