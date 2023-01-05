@@ -11,9 +11,10 @@ import { Navigate } from 'react-router-dom';
 import AuthContainer from "./components/Auth/AuthContainer";
 import UsersContainer from './components/Users/UsersContainer';
 import NavMenuContainer from './components/NavMenu/NavMenuContainer';
+import React from 'react';
 const { Header, Content } = Layout;
 
-function App() {
+const App: React.FC = () => {
   return (
       <Provider store={store}>
         <BrowserRouter>
@@ -27,10 +28,10 @@ function App() {
                 <Route path='/main' element={<RequireAuth><Main/></RequireAuth>}>
                   <Route path=':id' element={<RequireAuth><Main/></RequireAuth>}/>
                 </Route>
-                <Route exact path='/counter' element={<RequireAuth><CalculationFormContainer/></RequireAuth>} />
-                <Route exact path='/rastrFiles' element={<RastrFilesContainer/>} />
-                <Route exact path='/users' element={<UsersContainer/>} />
-                <Route exact path='/auth' element={<AuthContainer/>} />
+                <Route path='/counter' element={<RequireAuth><CalculationFormContainer/></RequireAuth>} />
+                <Route path='/rastrFiles' element={<RastrFilesContainer/>} />
+                <Route path='/users' element={<UsersContainer/>} />
+                <Route path='/auth' element={<AuthContainer/>} />
             </Routes>
             </Content>
         </Layout>
@@ -39,7 +40,7 @@ function App() {
   );
 }
 
-const RequireAuth = ({ children }) => {
+const RequireAuth: any = ( {children}: any ) => {
   if (localStorage.getItem('user') == null) {
      return <AuthContainer />;
   }

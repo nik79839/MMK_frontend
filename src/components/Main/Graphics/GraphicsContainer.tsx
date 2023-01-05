@@ -95,5 +95,5 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
 }
 
 export default compose(
-    connect<MapStatePropsType>(mapStateToProps))
+    connect(mapStateToProps))
     (GraphicsContainer);

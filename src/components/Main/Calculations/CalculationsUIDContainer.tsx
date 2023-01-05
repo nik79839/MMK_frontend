@@ -47,5 +47,5 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
 }
 
 export default compose(
-    connect<MapStatePropsType, MapDispatchpropsType, AppStateType>(mapStateToProps, {getCalculations, getCalculationResultInfoById, deleteCalculationById}))
+    connect(mapStateToProps, {getCalculations, getCalculationResultInfoById, deleteCalculationById}))
     (CalculationsUIDContainer);

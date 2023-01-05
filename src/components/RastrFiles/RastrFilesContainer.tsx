@@ -31,12 +31,12 @@ const RastrFilesContainer: React.FC<PropsType> = (props) => {
             </> 
 }
 
-let mapStateToProps = (state: AppStateType) => {
+let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         rastrFiles: state.rastrFilesPage.rastrFiles
     }   
 }
 
 export default compose(
-    connect<MapStatePropsType, MapDispatchpropsType, AppStateType>(mapStateToProps, {getRastrFiles}))
+    connect(mapStateToProps, {getRastrFiles}))
     (RastrFilesContainer);

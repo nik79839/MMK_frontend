@@ -3,8 +3,20 @@ import { compose } from "redux";
 import { getUsers, createUser } from '../../redux/auth-reducer';
 import { connect } from 'react-redux';
 import Users from "./Users";
+import { AppStateType } from "../../redux/redux-store";
+import { usersType } from "../../types/types";
 
-const UsersContainer = React.memo((props) => {
+type MapStatePropsType = {
+    users: Array<usersType>
+}
+type MapDispatchpropsType = {
+    getUsers: () => void
+    createUser: (values: any) => void
+}
+
+type PropsType = MapStatePropsType & MapDispatchpropsType;
+
+const UsersContainer: React.FC<PropsType> = React.memo((props) => {
 
     const [spin, setSpin] = useState(true);
     
@@ -13,7 +25,7 @@ const UsersContainer = React.memo((props) => {
         setSpin(false);
     },[])
 
-    const createUser = (user) => {
+    const createUser = (user: any) => {
         props.createUser(user);
        }
 
@@ -23,7 +35,7 @@ const UsersContainer = React.memo((props) => {
         </div>  )           
 })
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         users: state.auth.users.users
     }   

@@ -1,13 +1,20 @@
-import React, { useState } from 'react';
-import { Button, Form, Input, Modal, Select } from 'antd';
-const UserCreateForm = ({ open, onCreate, onCancel }) => {
+import React from 'react';
+import {Form, Input, Modal, Select } from 'antd';
+
+type PropsType = {
+  open: boolean
+  onCancel: () => void
+  onCreate: (values: any) => void
+};
+
+const UserCreateForm: React.FC<PropsType> = (props) => {
   const [form] = Form.useForm();
   return (
-    <Modal open={open} title="Добавить нового опльзователя" okText="Создать" cancelText="Отмена" onCancel={onCancel}
+    <Modal open={props.open} title="Добавить нового опльзователя" okText="Создать" cancelText="Отмена" onCancel={props.onCancel}
       onOk={() => {
         form.validateFields().then((values) => {
             form.resetFields();
-            onCreate(values);
+            props.onCreate(values);
           })
           .catch((info) => {console.log('Validate Failed:', info);});
       }}>

@@ -5,13 +5,9 @@ import NavMenu from "./NavMenu";
 import { userType } from "../../types/types";
 import { AppStateType } from "../../redux/redux-store";
 
-type MapStatePropsType = {
-    user: userType
-}
 
-type PropsType = MapStatePropsType;
 
-const CalculationsUIDContainer: React.FC<PropsType> = (props) => { 
+const CalculationsUIDContainer: React.FC = () => { 
 
         return <>   
             <div>

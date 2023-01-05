@@ -17,7 +17,7 @@ type MapDispatchpropsType = {
 
 type PropsType = MapStatePropsType & MapDispatchpropsType;
 
-const AuthContainer: React.FC<PropsType> = React.memo((props) => {
+const AuthContainer: React.FC<PropsType> = (props) => {
 
     let navigate = useNavigate();
 
@@ -30,7 +30,7 @@ const AuthContainer: React.FC<PropsType> = React.memo((props) => {
     else {
         navigate("/");
     }
-})
+}
 
 let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {

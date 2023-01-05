@@ -33,7 +33,7 @@ const CalculationFormContainer: React.FC<PropsType> = (props) => {
             </> 
 }
 
-let mapStateToProps = (state: AppStateType) => {
+let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         rastrSchemeInfo: state.calculationFormPage.rastrSchemeInfo,
         rastrFiles: state.rastrFilesPage.rastrFiles,
@@ -41,5 +41,5 @@ let mapStateToProps = (state: AppStateType) => {
 }
 
 export default compose(
-    connect<MapStatePropsType, MapDispatchpropsType, AppStateType>(mapStateToProps, {getRastrSchemeInfo, startCalculation, getRastrFiles }))
+    connect(mapStateToProps, {getRastrSchemeInfo, startCalculation, getRastrFiles }))
     (CalculationFormContainer);
