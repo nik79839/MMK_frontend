@@ -32,7 +32,10 @@ const UserCreateForm: React.FC<PropsType> = (props) => {
           <Input type="textarea" />
         </Form.Item>
         <Form.Item name="ы" label="Роль" rules={[{required: true, message: 'Введите должность',},]}>
-          <Select />
+          <Select>
+            <Select.Option value="Пользователь">Технолог</Select.Option>
+            <Select.Option value="Администратор">Администратор</Select.Option>
+          </Select>
         </Form.Item>
         <Form.Item name="login" label="Логин" rules={[{required: true, message: 'Введите логин',},]}>
           <Input type="textarea" />

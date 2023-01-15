@@ -43,7 +43,7 @@ export const authAPI = {
         return instance.get('Auth/GetUsers'); //
     },
     createUser(values: any) {
-        return axios.post('Auth/CreateUser',values); //
+        return instance.post('Auth/CreateUser',values); //
     },
 }
 

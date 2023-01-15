@@ -84,7 +84,8 @@ export const getCalculationResultInfoById = (id: any): ThunkType => {
 export const deleteCalculationById = (id: any): ThunkType => {
     return async (dispatch) => { 
         let response = await mainAPI.deleteCalculationById(id);
-        dispatch(actions.setCalculations(response.data));       
+        let response2 = await mainAPI.getCalculations();
+        dispatch(actions.setCalculations(response2.data));      
     }
 }
  
