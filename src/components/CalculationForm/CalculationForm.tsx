@@ -4,7 +4,7 @@ import { Form, Input,Button,InputNumber, Select, Row, Card, Space, message } fro
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import {useNavigate} from "react-router-dom"
 import { fileType, rastrSchemeInfoType } from '../../types/types';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppStateType } from '../../redux/redux-store';
 import { Dispatch } from 'redux';
@@ -19,6 +19,8 @@ export const CalculationForm: React.FC = () => {
   const rastrSchemeInfo = useSelector((state: AppStateType) => state.calculationFormPage.rastrSchemeInfo);
   const dispatch: Dispatch<any> = useDispatch();
 
+  const [isRegimSelected, setIsRegimSelected] = useState(true);
+
   useEffect(() => {
     dispatch(getRastrFiles());
     dispatch(getRastrSchemeInfo());
@@ -32,11 +34,6 @@ export const CalculationForm: React.FC = () => {
     });
 
 let navigate = useNavigate();
-
-  const abortZ = () => {
-    source.cancel();
-    console.log("Cancel");
-  };
 
   const onFinish = (values: any) => {
     console.log('Success:', values);
@@ -60,14 +57,6 @@ let navigate = useNavigate();
       <Form.Item label="Описание расчета" name="description">
         <TextArea autoSize={{maxRows: 3,}} maxLength={200}/>
       </Form.Item>
-      <Form.Item label="Файл режима" name="rastrFile" rules={[{
-            required: true, message: 'Выберите файл режима!',},]}>
-        <Select>
-        {rastrFiles?.map((rastrFile) => (
-          <Select.Option value={rastrFile.name}>{rastrFile.name} </Select.Option>
-        ))}
-        </Select>
-      </Form.Item>
       <Form.Item label="Количество реализаций" name="countOfImplementations" rules={[{
             required: true, message: 'Введите количество реализаций!',},]}>
         <InputNumber min={1} max={1000} />
@@ -80,7 +69,15 @@ let navigate = useNavigate();
             required: true, message: 'Введите значение!',},]}>
         <InputNumber min={0} max={200} prefix='%'/>
       </Form.Item>
-      <Form.Item label="Контролируемое сечение" name="sechNumber" rules={[{
+      <Form.Item label="Файл режима" name="rastrFile" rules={[{
+            required: true, message: 'Выберите файл режима!',},]}>
+        <Select onChange={() => setIsRegimSelected(false)}>
+        {rastrFiles?.map((rastrFile) => (
+          <Select.Option value={rastrFile.name}>{rastrFile.name} </Select.Option>
+        ))}
+        </Select>
+      </Form.Item>
+      <Form.Item hidden={isRegimSelected} label="Контролируемое сечение" name="sechNumber" rules={[{
             required: true, message: 'Выберите сечение!',},]}>
         <Select>
           {rastrSchemeInfo.seches?.map((sech) => (
@@ -88,7 +85,7 @@ let navigate = useNavigate();
         </Select>
       </Form.Item>
 
-      <Form.Item label="Узлы для контроля напряжения" name='uNodes' >
+      <Form.Item hidden={isRegimSelected} label="Узлы для контроля напряжения" name='uNodes' >
                   <Select style={{width: 500,}} showSearch mode='multiple' >
                   {rastrSchemeInfo.districts?.map((district) => (
                     <Select.OptGroup label={district.name}>
@@ -105,7 +102,7 @@ let navigate = useNavigate();
                   </Select>
                 </Form.Item>
 
-      <Form.Item label="Ветви для контроля тока" name='iBrunches' >
+      <Form.Item hidden={isRegimSelected} label="Ветви для контроля тока" name='iBrunches' >
                   <Select style={{width: 500,}} showSearch mode='multiple' >
                     {rastrSchemeInfo.brunches?.map((brunch) => {
                       return ( 
@@ -113,7 +110,7 @@ let navigate = useNavigate();
                   </Select>
                 </Form.Item>
 
-      <div style={{ overflowY: "scroll", maxHeight: "700px", boxShadow: '0px 2px 5px 0px rgba(0, 0, 0, 0.5)'}}>
+      <div hidden={isRegimSelected} style={{ overflowY: "scroll", maxHeight: "700px", boxShadow: '0px 2px 5px 0px rgba(0, 0, 0, 0.5)'}}>
         <label style = {{marginInlineStart: '15px', marginTop: '10px', marginBottom: '5px'}}>Параметры утяжеления:</label>
       <Form.List name="worseningSettings">
         {(fields, { add, remove }) => (
@@ -163,6 +160,5 @@ let navigate = useNavigate();
     </Form>
     </Card>
         </Row>
-      <button onClick={abortZ}/>
         </div> 
 }
