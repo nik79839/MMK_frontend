@@ -1,6 +1,7 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The following frameworks and software tools are used: React.js, Redux, Ant Design, Node.js, NGINX.
 
 ## Available Scripts
 
